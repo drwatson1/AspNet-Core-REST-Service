@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Serilog;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,9 +10,17 @@ namespace WebApplication15.Controllers
 {
     public class ValuesController : ApiController
     {
+        private ILogger Logger { get; }
+
+        public ValuesController(ILogger logger)
+        {
+            Logger = logger ?? throw new ArgumentNullException(nameof(logger));
+        }
+
         // GET api/<controller>
         public IEnumerable<string> Get()
         {
+            Logger.Information("URL: {HttpRequestUrl}");
             return new string[] { "value1", "value2" };
         }
 

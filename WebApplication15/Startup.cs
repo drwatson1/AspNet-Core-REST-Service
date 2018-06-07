@@ -4,9 +4,13 @@ using System.Reflection;
 using System.Web.Http;
 using Autofac;
 using Autofac.Integration.WebApi;
+using AutofacSerilogIntegration;
 using Microsoft.Owin;
 using Owin;
 using Serilog;
+using Serilog.Events;
+using Serilog.Exceptions;
+using SerilogWeb.Classic;
 using static System.Environment;
 
 [assembly: OwinStartup(typeof(WebApplication15.Startup))]
@@ -19,8 +23,9 @@ namespace WebApplication15
         {
             // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=316888
             HttpConfiguration config = new HttpConfiguration();
-            ConfigureAutofac(app, config);
+
             ConfigureLogger(app, config);
+            ConfigureAutofac(app, config);
 
             WebApiConfig.Register(config);
 
@@ -40,10 +45,20 @@ namespace WebApplication15
             Log.Logger = new LoggerConfiguration()
                 .WriteTo.File(ExpandEnvironmentVariables($"%AppData%/Logs/{name}..txt"), rollingInterval: RollingInterval.Day)
                 .ReadFrom.AppSettings()
+
+                // Enrich with SerilogWeb.Classic (https://github.com/serilog-web/classic)
+                .Enrich.WithHttpRequestUrl()
+                .Enrich.WithHttpRequestType()
+
+                .Enrich.WithExceptionDetails()
+
                 .CreateLogger();
 
-            Log.Information("aaa");
-            Log.Debug("bbb");
+            // By defaut we don't want to see all HTTP requests in log file, but you can change this by ajusting this setting
+            // Additional information can be found here https://github.com/serilog-web/classic
+            // TODO: Change WebApi requests logging level
+            SerilogWebClassic.Configure(cfg => cfg
+              .LogAtLevel(LogEventLevel.Debug));  // All requests will
         }
 
         private void ConfigureAutofac(IAppBuilder app, HttpConfiguration config)
@@ -52,6 +67,8 @@ namespace WebApplication15
 
             // Register your Web API controllers.
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly()).InstancePerRequest();
+            builder.RegisterLogger();
+
             RegisterDiServices(builder);
 
             var container = builder.Build();
