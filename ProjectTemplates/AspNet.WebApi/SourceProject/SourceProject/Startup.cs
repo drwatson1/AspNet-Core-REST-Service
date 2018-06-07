@@ -13,9 +13,9 @@ using Serilog.Exceptions;
 using SerilogWeb.Classic;
 using static System.Environment;
 
-[assembly: OwinStartup(typeof(WebApplication15.Startup))]
+[assembly: OwinStartup(typeof(SourceProject.Startup))]
 
-namespace WebApplication15
+namespace SourceProject
 {
     public class Startup
     {
