@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using System.IO;
+using System.Web.Http;
 using Microsoft.Owin;
 using Owin;
 
@@ -10,6 +11,13 @@ namespace ReferenceProject
     {
         public void Configuration(IAppBuilder app)
         {
+            // Use DotNetEnv v1.1.0 due to it is the only version with out dependencies
+            var envFilePath = System.IO.Path.Combine(System.Web.HttpRuntime.AppDomainAppPath, ".env");
+            if (File.Exists(envFilePath))
+            {
+                DotNetEnv.Env.Load(envFilePath);
+            }
+
             var corsOptions = CorsConfig.ConfigureCors(Settings.AllowedOrigins);
             app.UseCors(corsOptions);
 
