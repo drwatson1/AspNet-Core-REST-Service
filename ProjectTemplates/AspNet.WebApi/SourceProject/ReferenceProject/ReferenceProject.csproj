@@ -136,6 +136,7 @@
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Handlers\ExceptionFilter.cs" />
     <Compile Include="Handlers\ExceptionLogger.cs" />
     <Compile Include="Handlers\OptionsHttpMessageHandler.cs" />
     <Compile Include="Handlers\CacheControlMiddleware.cs" />
