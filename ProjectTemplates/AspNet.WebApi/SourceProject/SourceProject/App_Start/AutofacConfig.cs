@@ -23,7 +23,7 @@ namespace SourceProject
         /// Initializes and configures instance of <see cref="IContainer"/>.
         /// </summary>
         /// <param name="config"></param>
-        public static void Configure(IAppBuilder app, HttpConfiguration config)
+        public static void Configure(HttpConfiguration config)
         {
             if (config == null)
                 throw new ArgumentNullException(nameof(config));
@@ -39,9 +39,6 @@ namespace SourceProject
             Container = builder.Build();
 
             config.DependencyResolver = new AutofacWebApiDependencyResolver(Container);
-
-            app.UseAutofacMiddleware(Container);
-            app.UseAutofacWebApi(config);
         }
 
         private static void RegisterServices(ContainerBuilder builder)

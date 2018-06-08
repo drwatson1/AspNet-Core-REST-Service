@@ -16,7 +16,11 @@ namespace SourceProject
             FormatterConfig.Configure(config);
             RouteConfig.Configure(config);
             LoggerConfig.Configure(config);
-            AutofacConfig.Configure(app, config);
+
+            AutofacConfig.Configure(config);
+
+            app.UseAutofacMiddleware(AutofacConfig.Container);
+            app.UseAutofacWebApi(config);
 
             app.UseWebApi(config);
         }
