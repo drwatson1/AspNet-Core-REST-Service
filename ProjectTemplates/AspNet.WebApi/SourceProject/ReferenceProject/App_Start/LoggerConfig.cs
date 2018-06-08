@@ -5,6 +5,7 @@ using SerilogWeb.Classic;
 using System.IO;
 using System.Reflection;
 using System.Web.Http;
+using System.Web.Http.ExceptionHandling;
 using static System.Environment;
 
 namespace ReferenceProject
@@ -40,6 +41,8 @@ namespace ReferenceProject
             // TODO: Change WebApi requests logging level
             SerilogWebClassic.Configure(cfg => cfg
               .LogAtLevel(LogEventLevel.Debug));  // All requests will
+
+            config.Services.Replace(typeof(IExceptionLogger), new ExceptionLogger());
         }
     }
 }

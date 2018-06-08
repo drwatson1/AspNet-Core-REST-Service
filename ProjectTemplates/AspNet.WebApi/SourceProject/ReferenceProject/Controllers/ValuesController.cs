@@ -20,8 +20,9 @@ namespace ReferenceProject
         // GET api/<controller>
         public IEnumerable<string> Get()
         {
-            Logger.Information("URL: {HttpRequestUrl}");
-            return new string[] { "value1", "value2" };
+            throw new Exception("Example exception");
+            //Logger.Information("URL: {HttpRequestUrl}");
+            //return new string[] { "value1", "value2" };
         }
 
         // GET api/<controller>/5

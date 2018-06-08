@@ -10,7 +10,7 @@ namespace ReferenceProject
             if (config == null)
                 throw new ArgumentNullException(nameof(config));
 
-            config.MessageHandlers.Add(new Handlers.OptionsHttpMessageHandler());
+            config.MessageHandlers.Add(new OptionsHttpMessageHandler());
         }
     }
 }
