@@ -28,6 +28,8 @@ namespace SourceProject
             app.UseAutofacMiddleware(AutofacConfig.Container);
             app.UseAutofacWebApi(config);
 
+            app.PreventResponseCaching();
+
             app.UseWebApi(config);
         }
     }
