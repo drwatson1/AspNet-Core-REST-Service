@@ -21,6 +21,13 @@ namespace SourceProject.Handlers
             if (request.Method == HttpMethod.Options)
             {
                 /*
+                // apiExplorer.ApiDescriptions - always has 0 entries in my case.
+                // This would be checked out in IIS instead of IISExpress thus this doesn't work
+                var apiExplorer = GlobalConfiguration.Configuration.Services.GetApiExplorer();
+                var desc = apiExplorer.ApiDescriptions;
+                */
+
+                /*
                 var apiExplorer = GlobalConfiguration.Configuration.Services.GetApiExplorer();
                 var route = request.GetRouteData();
                 if (route == null)
