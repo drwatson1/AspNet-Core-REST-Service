@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Web.Http;
 
-namespace SourceProject
+namespace ReferenceProject
 {
     /// <summary>
     /// Example

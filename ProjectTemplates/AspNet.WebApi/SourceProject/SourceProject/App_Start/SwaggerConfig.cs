@@ -2,7 +2,7 @@
 using System;
 using System.Web.Http;
 
-namespace SourceProject
+namespace ReferenceProject
 {
     public static class SwaggerConfig
     {

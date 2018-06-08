@@ -4,9 +4,8 @@ using System.Web.Http;
 using Autofac;
 using Autofac.Integration.WebApi;
 using AutofacSerilogIntegration;
-using Owin;
 
-namespace SourceProject
+namespace ReferenceProject
 {
     /// <summary>
     /// Represent Autofac configuration.

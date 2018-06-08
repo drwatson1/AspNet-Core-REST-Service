@@ -1,7 +1,6 @@
-﻿using Swashbuckle.Application;
-using System.Web.Http;
+﻿using System.Web.Http;
 
-namespace SourceProject
+namespace ReferenceProject
 {
     public static class RouteConfig
     {

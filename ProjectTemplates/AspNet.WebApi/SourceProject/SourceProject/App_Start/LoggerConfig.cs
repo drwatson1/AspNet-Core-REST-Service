@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Web.Http;
 using static System.Environment;
 
-namespace SourceProject
+namespace ReferenceProject
 {
     public static class LoggerConfig
     {

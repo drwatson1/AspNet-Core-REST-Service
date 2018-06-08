@@ -1,12 +1,10 @@
-﻿using System.Net;
-using System.Threading.Tasks;
-using System.Web.Http;
+﻿using System.Web.Http;
 using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartup(typeof(SourceProject.Startup))]
+[assembly: OwinStartup(typeof(ReferenceProject.Startup))]
 
-namespace SourceProject
+namespace ReferenceProject
 {
     public class Startup
     {

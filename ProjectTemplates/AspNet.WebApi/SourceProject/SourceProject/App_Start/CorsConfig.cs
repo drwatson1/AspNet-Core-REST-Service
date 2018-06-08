@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Cors;
 
-namespace SourceProject
+namespace ReferenceProject
 {
     /// <summary>
     /// Represents CORS configuration.

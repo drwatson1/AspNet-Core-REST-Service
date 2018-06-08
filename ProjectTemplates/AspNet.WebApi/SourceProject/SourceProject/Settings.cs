@@ -5,7 +5,7 @@ using System.Configuration;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 
-namespace SourceProject
+namespace ReferenceProject
 {
     /// <summary>
     /// Represents all application settings

@@ -1,13 +1,9 @@
-﻿using Serilog;
-using System;
-using System.Linq;
-using System.Net;
+﻿using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Web.Http;
 
-namespace SourceProject.Handlers
+namespace ReferenceProject.Handlers
 {
     /// <summary>
     /// OPTIONS HTTP query handler
@@ -21,6 +17,7 @@ namespace SourceProject.Handlers
             if (request.Method == HttpMethod.Options)
             {
                 /*
+                 * TODO: Find the way to implement this correctly
                 // apiExplorer.ApiDescriptions - always has 0 entries in my case.
                 // This would be checked out in IIS instead of IISExpress thus this doesn't work
                 var apiExplorer = GlobalConfiguration.Configuration.Services.GetApiExplorer();

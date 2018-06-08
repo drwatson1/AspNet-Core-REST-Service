@@ -2,7 +2,7 @@
 using System.Web.Http;
 using Newtonsoft.Json.Serialization;
 
-namespace SourceProject
+namespace ReferenceProject
 {
     /// <summary>
     /// Represents formatter configuration.

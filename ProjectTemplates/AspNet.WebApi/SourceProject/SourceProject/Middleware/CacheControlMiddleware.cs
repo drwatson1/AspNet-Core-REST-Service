@@ -3,7 +3,7 @@ using Owin;
 using System;
 using System.Threading.Tasks;
 
-namespace SourceProject
+namespace ReferenceProject
 {
     public static class CacheControlMiddleware
     {
