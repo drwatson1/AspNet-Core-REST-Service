@@ -119,9 +119,11 @@
     <Compile Include="App_Start\CorsConfig.cs" />
     <Compile Include="App_Start\FormatterConfig.cs" />
     <Compile Include="App_Start\LoggerConfig.cs" />
+    <Compile Include="App_Start\OptionsMessageHandlerConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Handlers\OptionsHttpMessageHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Startup.cs" />
