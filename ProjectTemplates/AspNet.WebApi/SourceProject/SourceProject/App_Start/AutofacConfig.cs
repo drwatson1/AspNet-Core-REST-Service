@@ -41,7 +41,9 @@ namespace SourceProject
             config.DependencyResolver = new AutofacWebApiDependencyResolver(Container);
         }
 
+#pragma warning disable RECS0154 // Parameter is never used
         private static void RegisterServices(ContainerBuilder builder)
+#pragma warning restore RECS0154 // Parameter is never used
         {
             // TODO: Register additional services for injection
         }

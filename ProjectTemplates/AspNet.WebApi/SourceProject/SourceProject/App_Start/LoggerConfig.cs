@@ -11,7 +11,9 @@ namespace SourceProject
 {
     public static class LoggerConfig
     {
+#pragma warning disable RECS0154 // Parameter is never used
         public static void Configure(HttpConfiguration config)
+#pragma warning restore RECS0154 // Parameter is never used
         {
             // Use Seriog for logging
             // More information can be found here https://github.com/serilog/serilog/wiki/Getting-Started
