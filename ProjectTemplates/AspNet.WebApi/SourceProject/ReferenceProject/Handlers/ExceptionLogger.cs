@@ -9,7 +9,6 @@ namespace ReferenceProject
     {
         public Task LogAsync(ExceptionLoggerContext context, CancellationToken cancellationToken)
         {
-            Log.Error(context.ExceptionContext.Request.RequestUri + " " +  context.ExceptionContext.Exception.Message);
             Log.Error(context.Exception, context.ExceptionContext.Request.RequestUri.ToString());
             return Task.CompletedTask;
         }
