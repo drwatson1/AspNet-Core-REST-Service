@@ -1,4 +1,5 @@
-﻿using Serilog;
+﻿using AutoMapper;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Web.Http;
@@ -19,9 +20,11 @@ namespace ReferenceProject
     public class ValuesController : ApiController
     {
         private ILogger Logger { get; }
+        private IMapper Mapper { get; }
 
-        public ValuesController(ILogger logger)
+        public ValuesController(ILogger logger, IMapper mapper)
         {
+            Mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             Logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 

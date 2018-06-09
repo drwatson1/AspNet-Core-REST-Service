@@ -26,10 +26,12 @@ namespace ReferenceProject
 
             config.Filters.Add(new ExceptionFilter());
 
+            AutoMapperConfig.Configure(); // This call should be made before AutofacConfig.Configure
+            AutofacConfig.Configure(config);
+
             FormatterConfig.Configure(config);
             RouteConfig.Configure(config);
             LoggerConfig.Configure(config);
-            AutofacConfig.Configure(config);
             OptionsMessageHandlerConfig.Configure(config);
             SwaggerConfig.Configure(config);
 
