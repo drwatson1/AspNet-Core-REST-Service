@@ -40,15 +40,7 @@ namespace ReferenceProject
 
             app.PreventResponseCaching();
 
-            /*
-            TODO: Uncomment this and set up parameters in web.config to enable authentication
-            app.UseJsonWebToken(
-                issuer: Settings.Auth.Issuer,
-                audience: Settings.Auth.Audience,
-                signingKey: Settings.Auth.IssuerCertificate
-                );
-            */
-
+            app.UseAuthentication();
             app.UseWebApi(config);
         }
     }

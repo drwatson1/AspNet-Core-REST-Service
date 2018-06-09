@@ -29,6 +29,11 @@ namespace ReferenceProject
             {
                 get
                 {
+                    if(string.IsNullOrWhiteSpace(IssuerCertThumbprint))
+                    {
+                        Log.Error($"Using Settings.Auth.IssuerCertificate before setting up a '{Constants.Settings.Auth.CertThumbprint}' value in the web.config");
+                        throw new Exception($"Your have to set up a '{Constants.Settings.Auth.CertThumbprint}' value in the web.config before using Settings.Auth.IssuerCertificate");
+                    }
                     if (signingCertificate != null)
                     {
                         return signingCertificate;
@@ -36,8 +41,8 @@ namespace ReferenceProject
                     signingCertificate = X509.LocalMachine.My.Thumbprint.Find(IssuerCertThumbprint).FirstOrDefault();
                     if (signingCertificate == null)
                     {
-                        Log.Error("Can't find certificate with thumbpring '{cert}'", IssuerCertThumbprint);
-                        throw new Exception($"Can't find certificate with thumbpring '{IssuerCertThumbprint}'");
+                        Log.Error("Can't find certificate with a thumbpring '{cert}'", IssuerCertThumbprint);
+                        throw new Exception($"Can't find certificate with a thumbpring '{IssuerCertThumbprint}'");
                     }
                     return signingCertificate;
                 }
