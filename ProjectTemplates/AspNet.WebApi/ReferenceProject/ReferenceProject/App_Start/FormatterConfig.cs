@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.Http;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
 namespace ReferenceProject
@@ -20,8 +21,18 @@ namespace ReferenceProject
 
             config.Formatters.Remove(config.Formatters.XmlFormatter);
 
-            config.Formatters.JsonFormatter.SerializerSettings.ContractResolver =
-                new CamelCasePropertyNamesContractResolver();
+            config.Formatters.JsonFormatter.SerializerSettings = new JsonSerializerSettings
+            {
+                NullValueHandling = NullValueHandling.Ignore,
+                DefaultValueHandling = DefaultValueHandling.Include,
+#if DEBUG
+                Formatting = Formatting.Indented,
+#else
+                Formatting = Formatting.None,
+#endif
+                ContractResolver = new CamelCasePropertyNamesContractResolver(),
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            };
 
             config.Formatters.JsonFormatter.UseDataContractJsonSerializer = false;
         }

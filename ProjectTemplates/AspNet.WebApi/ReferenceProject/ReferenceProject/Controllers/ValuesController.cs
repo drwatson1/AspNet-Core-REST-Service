@@ -5,6 +5,14 @@ using System.Web.Http;
 
 namespace ReferenceProject
 {
+    public class ComplexType
+    {
+        public string Key { get; set; }
+        public string Value { get; set; }
+        public string NullValue { get; set; } = null;
+        public int IntValue { get; set; } = 0;
+    }
+
     /// <summary>
     /// Example
     /// </summary>
@@ -20,9 +28,22 @@ namespace ReferenceProject
         // GET api/<controller>
         public IEnumerable<string> Get()
         {
+            Logger.Information("URL: {HttpRequestUrl}");
+            return new string[] { "value1", "value2" };
+        }
+
+        [HttpGet]
+        [Route("GetComplex")]
+        public ComplexType GetComplex()
+        {
+            return new ComplexType() { Key = "Key", Value = "Value" };
+        }
+
+        [HttpGet]
+        [Route("ThrowException")]
+        public void ThrowException()
+        {
             throw new Exception("Example exception");
-            //Logger.Information("URL: {HttpRequestUrl}");
-            //return new string[] { "value1", "value2" };
         }
 
         // GET api/<controller>/5

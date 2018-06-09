@@ -32,12 +32,7 @@ namespace ReferenceProject
         {
             var responseContent = new ErrorResponse(actionExecutedContext.Exception);
 
-            var content = new ObjectContent<ErrorResponse>(responseContent, new JsonMediaTypeFormatter());
-
-            actionExecutedContext.Response = new HttpResponseMessage(HttpStatusCode.InternalServerError)
-            {
-                Content = new ObjectContent<ErrorResponse>(responseContent, new JsonMediaTypeFormatter())
-            };
+            actionExecutedContext.Response = actionExecutedContext.Request.CreateResponse(HttpStatusCode.InternalServerError, responseContent);
         }
     }
 }
