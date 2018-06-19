@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="ASP.Net WebAPI Application Project Template-1" Version="0.9" Language="en-US" Publisher="Sergey Tregub" />
+        <Identity Id="ASP.Net WebAPI Application Project Template-1" Version="0.12" Language="en-US" Publisher="Sergey Tregub" />
         <DisplayName>ASP.Net WebAPI Application Project Template</DisplayName>
         <Description xml:space="preserve">Project template to create production-ready RESTful service based on ASP.Net WebAPI and OWIN. It contains preconfigured DI-container, logging, CORS, JWT-bearer authentication, boilerplate code and other features</Description>
         <MoreInfo>https://github.com/drwatson1/AspNet-WebApi</MoreInfo>
@@ -14,7 +14,7 @@
         <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="[4.7,)" />
     </Dependencies>
     <Assets>
-        <Asset Type="Microsoft.VisualStudio.ProjectTemplate" d:Source="File" Path="ProjectTemplates" d:TargetPath="ProjectTemplates\ASP.Net WebAPI Application with OWIN.zip" />
+        <Asset Type="Microsoft.VisualStudio.ProjectTemplate" d:Source="File" Path="ProjectTemplates" d:TargetPath="ProjectTemplates\CSharp\Web\ASP.Net WebAPI Application with OWIN.zip" />
     </Assets>
     <Prerequisites>
         <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor" Version="[15.0,16.0)" DisplayName="Visual Studio core editor" />

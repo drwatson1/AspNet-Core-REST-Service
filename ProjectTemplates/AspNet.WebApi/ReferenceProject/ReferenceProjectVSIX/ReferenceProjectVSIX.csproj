@@ -48,7 +48,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ProjectTemplates\ASP.Net WebAPI Application with OWIN.zip">
+    <Content Include="ProjectTemplates\CSharp\Web\ASP.Net WebAPI Application with OWIN.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
