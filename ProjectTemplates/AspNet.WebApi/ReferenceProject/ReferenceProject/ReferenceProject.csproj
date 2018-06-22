@@ -127,7 +127,6 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ReferenceProject.vstemplate" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
