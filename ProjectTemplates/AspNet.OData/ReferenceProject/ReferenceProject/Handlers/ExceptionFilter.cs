@@ -1,38 +1,24 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Formatting;
 using System.Web.Http.Filters;
 
 namespace ReferenceProject
 {
     public class ExceptionFilter : ExceptionFilterAttribute
     {
-        private class ErrorResponse
-        {
-            public ErrorResponse(Exception ex)
-            {
-                Error = new ErrorDescription()
-                {
-                    Message = ex.Message,
-                    InnerException = ex.InnerException != null ? ex.InnerException.Message : null
-                };
-            }
-
-            public class ErrorDescription
-            {
-                public string Message { get; set; }
-                public string InnerException { get; set; }
-            }
-
-            public ErrorDescription Error { get; set; }
-        }
-
         public override void OnException(HttpActionExecutedContext actionExecutedContext)
         {
-            var responseContent = new ErrorResponse(actionExecutedContext.Exception);
-
-            actionExecutedContext.Response = actionExecutedContext.Request.CreateResponse(HttpStatusCode.InternalServerError, responseContent);
+            // TODO: Add another exceptions
+            if (actionExecutedContext.Exception is KeyNotFoundException)
+            {
+                // Replace 500 Internal Server Error to 404 Not Found for KeyNotFoundException
+                actionExecutedContext.Response = actionExecutedContext.Request.CreateErrorResponse(HttpStatusCode.NotFound, actionExecutedContext.Exception.Message);
+            }
+            else
+            {
+                actionExecutedContext.Response = actionExecutedContext.Request.CreateErrorResponse(HttpStatusCode.InternalServerError, actionExecutedContext.Exception);
+            }
         }
     }
 }

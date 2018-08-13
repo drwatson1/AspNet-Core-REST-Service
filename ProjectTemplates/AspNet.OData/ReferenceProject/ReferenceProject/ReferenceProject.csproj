@@ -123,6 +123,9 @@
     <PackageReference Include="Thinktecture.IdentityModel.Owin">
       <Version>2.1.1</Version>
     </PackageReference>
+    <PackageReference Include="Thinktecture.IdentityModel.WebApi">
+      <Version>2.0.1</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />

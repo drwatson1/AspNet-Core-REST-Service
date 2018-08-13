@@ -32,6 +32,7 @@
       <ProjectItem ReplaceParameters="true" TargetFileName="Constants.cs">Constants.cs</ProjectItem>
       <Folder Name="Controllers" TargetFolderName="Controllers">
         <ProjectItem ReplaceParameters="true" TargetFileName="ValuesController.cs">ValuesController.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="ProductsController.cs">ProductsController.cs</ProjectItem>
       </Folder>
       <Folder Name="Handlers" TargetFolderName="Handlers">
         <ProjectItem ReplaceParameters="true" TargetFileName="CacheControlMiddleware.cs">CacheControlMiddleware.cs</ProjectItem>
