@@ -32,7 +32,7 @@ namespace ReferenceProject
             // Register your Web API controllers.
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly()).InstancePerRequest();
             builder.RegisterLogger();
-            builder.RegisterInstance(AutoMapperConfig.Mapper);
+            builder.RegisterInstance(AutoMapperConfig.Configure(config));
 
             RegisterServices(builder);
 

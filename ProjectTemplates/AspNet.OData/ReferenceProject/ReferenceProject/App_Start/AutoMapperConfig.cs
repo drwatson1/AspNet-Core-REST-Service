@@ -8,15 +8,21 @@ namespace ReferenceProject
     {
         protected internal static IMapper Mapper;
 
-        public static void Configure()
+        static Func<Type, object> GetResolver(HttpConfiguration config) => type => config.DependencyResolver.GetService(type);
+
+        public static IMapper Configure(HttpConfiguration config)
         {
             Action<IMapperConfigurationExpression> mapperConfigurationExp = cfg =>
             {
+                cfg.ConstructServicesUsing(GetResolver(config));
+
                 // TODO: Create mappings here
             };
 
             var mapperConfiguration = new MapperConfiguration(mapperConfigurationExp);
             Mapper = mapperConfiguration.CreateMapper();
+
+            return Mapper;
         }
     }
 }

@@ -26,7 +26,6 @@ namespace ReferenceProject
 
             config.Filters.Add(new ExceptionFilter());
 
-            AutoMapperConfig.Configure(); // This call should be made before AutofacConfig.Configure
             AutofacConfig.Configure(config);
 
             FormatterConfig.Configure(config);
