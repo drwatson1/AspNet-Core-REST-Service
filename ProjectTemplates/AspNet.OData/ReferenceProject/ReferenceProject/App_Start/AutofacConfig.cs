@@ -46,6 +46,7 @@ namespace ReferenceProject
 #pragma warning restore RECS0154 // Parameter is never used
         {
             // TODO: Register additional services for injection
+            // For more information see https://github.com/drwatson1/AspNet-WebApi/wiki#dependency-injection
         }
     }
 }

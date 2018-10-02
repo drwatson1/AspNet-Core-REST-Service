@@ -8,6 +8,7 @@ namespace ReferenceProject
     /// <summary>
     /// Represents CORS configuration.
     /// </summary>
+    /// <remarks>For more information see https://github.com/drwatson1/AspNet-WebApi/wiki#cross-origin-resource-sharing-cors</remarks>
     public static class CorsConfig
     {
         /// <summary>

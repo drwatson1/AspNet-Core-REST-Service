@@ -17,6 +17,7 @@ namespace ReferenceProject
                 cfg.ConstructServicesUsing(GetResolver(config));
 
                 // TODO: Create mappings here
+                // For more information see https://github.com/drwatson1/AspNet-WebApi/wiki#automapper
             };
 
             var mapperConfiguration = new MapperConfiguration(mapperConfigurationExp);
