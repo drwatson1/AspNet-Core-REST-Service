@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Configuration;
 using Serilog;
 
 using Autofac.Extensions.DependencyInjection;
@@ -26,6 +27,10 @@ namespace ReferenceProject
                         .CreateLogger();
 
                     logging.AddSerilog();
+                })
+                .ConfigureAppConfiguration(x => 
+                {
+                    x.AddEnvironmentVariables();
                 })
                 .UseStartup<Startup>();
     }

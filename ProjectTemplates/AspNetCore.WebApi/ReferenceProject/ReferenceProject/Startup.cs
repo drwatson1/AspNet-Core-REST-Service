@@ -3,7 +3,10 @@ using Autofac;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
@@ -24,6 +27,8 @@ namespace ReferenceProject
             {
                 DotNetEnv.Env.Load();
             }
+
+            //Configuration.AddEnvironmentVariables();
         }
 
         public IConfiguration Configuration { get; }
@@ -31,9 +36,15 @@ namespace ReferenceProject
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors();
-
-            services.AddMvc()
+            services.AddCors()
+                // Add useful interface for accessing the ActionContext outside a controller.
+                .AddSingleton<IActionContextAccessor, ActionContextAccessor>()
+                // Add useful interface for accessing the HttpContext outside a controller.
+                .AddSingleton<IHttpContextAccessor, HttpContextAccessor>()
+                // Add useful interface for accessing the IUrlHelper outside a controller.
+                .AddScoped<IUrlHelper>(x => x
+                    .GetRequiredService<IUrlHelperFactory>()
+                    .GetUrlHelper(x.GetRequiredService<IActionContextAccessor>().ActionContext)).AddMvc()
                 .AddJsonOptions(options =>
                 {
                     options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
@@ -47,6 +58,7 @@ namespace ReferenceProject
 #endif
                 })
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
             services.AddAutoMapper();
         }
 
@@ -66,13 +78,8 @@ namespace ReferenceProject
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app/*, IHostingEnvironment env*/)
         {
-            /*
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }*/
-
-            app.UseMiddleware<ExceptionMiddleware>();
+            app.UseMiddleware<ExceptionMiddleware>()
+                .UseMiddleware<PreventResponseCachingMiddleware>();
 
             app.UseCors(builder => builder
                 .AllowAnyOrigin()

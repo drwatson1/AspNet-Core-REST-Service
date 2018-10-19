@@ -1,15 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Net.Http;
-using System.Net;
 using Microsoft.Extensions.Logging;
-using System.Web.Http;
-using System.Net.Mime;
-using System.Net.Http.Headers;
-using Microsoft.AspNetCore.Hosting;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
@@ -20,7 +13,7 @@ namespace ReferenceProject.Middleware
         RequestDelegate Next { get; }
         public ILogger Logger { get; }
 
-        public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger, IHostingEnvironment env)
+        public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger)
         {
             Logger = logger ?? throw new ArgumentNullException(nameof(logger));
             Next = next ?? throw new ArgumentNullException(nameof(next));
