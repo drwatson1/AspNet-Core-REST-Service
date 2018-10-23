@@ -8,7 +8,13 @@ namespace ReferenceProject
 {
     public class ComplexType
     {
+        /// <summary>
+        /// This is the object's key
+        /// </summary>
         public string Key { get; set; }
+        /// <summary>
+        /// This is the object's key
+        /// </summary>
         public string Value { get; set; }
         public string NullValue { get; set; } = null;
         public int IntValue { get; set; } = 0;
@@ -35,6 +41,10 @@ namespace ReferenceProject
             return new string[] { "value1", "value2" };
         }
 
+        /// <summary>
+        /// Getting complex type value
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("GetComplex")]
         public ComplexType GetComplex()
