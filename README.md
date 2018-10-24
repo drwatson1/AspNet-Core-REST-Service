@@ -16,3 +16,6 @@ Repository contains ready to use preconfigured project to create fully functiona
 - Ability to use environment variables in configuration options (web.config)
 - Support .env files to easy switching between different environments (DotNetEnv)
 - ... and some other boilerplate code
+
+Read [Wiki](https://github.com/drwatson1/AspNet-WebApi/wiki) for more information.
+Any suggestions and bug reports are very appeciated.
