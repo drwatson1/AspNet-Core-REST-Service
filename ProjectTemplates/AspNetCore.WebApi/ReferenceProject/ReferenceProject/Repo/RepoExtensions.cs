@@ -15,7 +15,7 @@ namespace ReferenceProject.Repo
         {
             if( !repo.TryGetById(id, out var r) )
             {
-                throw new KeyNotFoundException($"Object of type '{nameof(T)}' with the key '{id}' not found");
+                throw new KeyNotFoundException($"Object of type '{typeof(T).Name}' with the key '{id}' not found");
             }
 
             return r;

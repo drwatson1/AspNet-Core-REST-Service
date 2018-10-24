@@ -27,8 +27,6 @@ namespace ReferenceProject
             {
                 DotNetEnv.Env.Load();
             }
-
-            //Configuration.AddEnvironmentVariables();
         }
 
         public IConfiguration Configuration { get; }
