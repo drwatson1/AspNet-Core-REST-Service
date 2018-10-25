@@ -34,7 +34,7 @@ namespace ReferenceProject
             Logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        // GET api/<controller>
+        // GET <controller>
         public IEnumerable<string> Get()
         {
             Logger.Information("URL: {HttpRequestUrl}");
@@ -59,7 +59,7 @@ namespace ReferenceProject
             throw new Exception("Example exception");
         }
 
-        // GET api/<controller>/5
+        // GET <controller>/5
 #pragma warning disable RECS0154 // Parameter is never used
         public string Get(int id)
 #pragma warning restore RECS0154 // Parameter is never used
@@ -67,14 +67,14 @@ namespace ReferenceProject
             return "value";
         }
 
-        // POST api/<controller>
+        // POST <controller>
 #pragma warning disable RECS0154 // Parameter is never used
         public void Post([FromBody]string value)
 #pragma warning restore RECS0154 // Parameter is never used
         {
         }
 
-        // PUT api/<controller>/5
+        // PUT <controller>/5
 #pragma warning disable RECS0154 // Parameter is never used
 #pragma warning disable RECS0154 // Parameter is never used
         public void Put(int id, [FromBody]string value)
@@ -83,7 +83,7 @@ namespace ReferenceProject
         {
         }
 
-        // DELETE api/<controller>/5
+        // DELETE <controller>/5
 #pragma warning disable RECS0154 // Parameter is never used
         public void Delete(int id)
 #pragma warning restore RECS0154 // Parameter is never used
