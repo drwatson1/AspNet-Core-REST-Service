@@ -7,6 +7,7 @@ using Owin;
 
 namespace ReferenceProject
 {
+    // More information about https://github.com/drwatson1/AspNet-WebApi/wiki
     public class Startup
     {
         public void Configuration(IAppBuilder app)
