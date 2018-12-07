@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using ReferenceProject.Repo;
 
 namespace ReferenceProject.Middleware
 {
@@ -21,12 +22,14 @@ namespace ReferenceProject.Middleware
 
         public async Task InvokeAsync(HttpContext context)
         {
+            var body = context.Response.Body;
             try
             {
                 await Next(context);
             }
             catch (Exception ex)
             {
+                context.Response.Body = body;
                 await HandleExceptionAsync(context, ex);
             }
         }
@@ -34,16 +37,28 @@ namespace ReferenceProject.Middleware
         async Task HandleExceptionAsync(HttpContext context, Exception ex)
         {
             int statusCode = 500;
-            context.Response.StatusCode = statusCode;
-            context.Response.ContentType = "application/json";
 
-            if( ex is KeyNotFoundException )
+            context.Response.ContentType = "application/json";
+            context.Response.StatusCode = statusCode;
+
+            if (ex is KeyNotFoundException)
             {
                 context.Response.StatusCode = StatusCodes.Status404NotFound;
             }
+            else if (ex is DuplicateKeyException)
+            {
+                context.Response.StatusCode = StatusCodes.Status400BadRequest;
+            }
 
-            await context.Response.WriteAsync(Newtonsoft.Json.JsonConvert.SerializeObject(new ErrorResponse(ex), new JsonSerializerSettings() {  ContractResolver = new CamelCasePropertyNamesContractResolver() }));
-            if(context.Response.StatusCode == 500)
+            await context.Response.WriteAsync(
+                JsonConvert.SerializeObject(
+                    new ErrorResponse(ex), 
+                    new JsonSerializerSettings()
+                    {
+                        ContractResolver = new CamelCasePropertyNamesContractResolver()
+                    }));
+
+            if (context.Response.StatusCode == 500)
             {
                 Logger.LogError(ex, "Unhandled exception occurred");
             }
