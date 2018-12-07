@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ReferenceProject.Controllers
 {
+#pragma warning disable RECS0154 // Parameter is never used
+
     [Route("api/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase
@@ -42,4 +41,6 @@ namespace ReferenceProject.Controllers
         {
         }
     }
+
+#pragma warning restore RECS0154 // Parameter is never used
 }

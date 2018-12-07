@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ReferenceProject.Controllers
@@ -30,7 +28,7 @@ namespace ReferenceProject.Controllers
         [HttpGet("action")]
         public void Action()
         {
-            throw new Exception("aaa");
+            throw new Exception("Example exception");
         }
     }
 }
