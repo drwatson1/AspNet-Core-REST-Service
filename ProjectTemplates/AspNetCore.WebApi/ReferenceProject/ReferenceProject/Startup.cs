@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using Autofac;
+using Autofac.Configuration;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -12,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using ReferenceProject.Middleware;
+using ReferenceProject.Modules;
 using Serilog;
 
 namespace ReferenceProject
@@ -63,14 +65,27 @@ namespace ReferenceProject
         // ConfigureContainer is where you can register things directly
         // with Autofac. This runs after ConfigureServices so the things
         // here will override registrations made in ConfigureServices.
-        // Don't build the container; that gets done for you. If you
-        // need a reference to the container, you need to use the
-        // "Without ConfigureContainer" mechanism shown later.
-#pragma warning disable RECS0154 // Parameter is never used
+        // Don't build the container; that gets done for you.
         public void ConfigureContainer(ContainerBuilder builder)
-#pragma warning restore RECS0154 // Parameter is never used
         {
-            builder.RegisterType<Repo.ProductsRepo>().As<Repo.IProductsRepo>().SingleInstance();
+            // Add things to the Autofac ContainerBuilder.
+            ConfigureContainerCommon(builder);
+        }
+
+        // This only gets called if your environment is Production. The
+        // default ConfigureContainer won't be automatically called if this
+        // one is called.
+        public void ConfigureProductionContainer(ContainerBuilder builder)
+        {
+            // Add things to the ContainerBuilder that are only for the
+            // production environment.
+            ConfigureContainerCommon(builder);
+        }
+
+        public void ConfigureContainerCommon(ContainerBuilder builder)
+        {
+            builder.RegisterModule(new DefaultModule());
+            builder.RegisterModule(new ConfigurationModule(Configuration));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
