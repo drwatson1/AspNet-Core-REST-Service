@@ -5,17 +5,29 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using ReferenceProject.Repo;
+using Microsoft.AspNetCore.Hosting;
+using ReferenceProject.Exceptions;
 
 namespace ReferenceProject.Middleware
 {
+    /// <summary>
+    /// Middleware to handle unhandled exceptions. 
+    /// It separates exceptions based on their type and returns different status codes and answers based on it, instead of 500 Internal Server Error code in all cases
+    /// </summary>
+    /// <remarks>
+    /// There is another way to do this - an exception filter.
+    /// However, a middleware is a preferred way to achieve this according to the official documentation.
+    /// To learn more see https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/filters?view=aspnetcore-2.2#exception-filters
+    /// </remarks>
     public class ExceptionMiddleware
     {
         RequestDelegate Next { get; }
-        public ILogger Logger { get; }
+        ILogger Logger { get; }
+        IHostingEnvironment Environment { get; }
 
-        public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger)
+        public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger, IHostingEnvironment environment)
         {
+            Environment = environment ?? throw new ArgumentNullException(nameof(environment));
             Logger = logger ?? throw new ArgumentNullException(nameof(logger));
             Next = next ?? throw new ArgumentNullException(nameof(next));
         }
@@ -29,6 +41,8 @@ namespace ReferenceProject.Middleware
             }
             catch (Exception ex)
             {
+                // If context.Response.HasStarted == true, then we can't write to the response stream anymore. So we have to restore the body.
+                // If we were don't do that we get an exception.
                 context.Response.Body = body;
                 await HandleExceptionAsync(context, ex);
             }
@@ -41,6 +55,7 @@ namespace ReferenceProject.Middleware
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = statusCode;
 
+            // We can decide what the status code should be
             if (ex is KeyNotFoundException)
             {
                 context.Response.StatusCode = StatusCodes.Status404NotFound;
@@ -52,23 +67,27 @@ namespace ReferenceProject.Middleware
 
             await context.Response.WriteAsync(
                 JsonConvert.SerializeObject(
-                    new ErrorResponse(ex), 
-                    new JsonSerializerSettings()
-                    {
-                        ContractResolver = new CamelCasePropertyNamesContractResolver()
-                    }));
+                    new ErrorResponse(ex, Environment.IsDevelopment())));
 
             if (context.Response.StatusCode == 500)
             {
                 Logger.LogError(ex, "Unhandled exception occurred");
             }
+            else
+            {
+                Logger.LogDebug(ex, "Unhandled exception occurred");
+            }
         }
 
         class ErrorResponse
         {
-            public ErrorResponse(Exception ex)
+            public ErrorResponse(Exception ex, bool includeFullExceptionInfo)
             {
                 Error = new ExceptionDescription(ex);
+                if(includeFullExceptionInfo)
+                {
+                    Error.Exception = ex;
+                }
             }
 
             public ExceptionDescription Error { get; set; }
@@ -82,7 +101,7 @@ namespace ReferenceProject.Middleware
             }
 
             public string Message { get; set; }
+            public Exception Exception { get; set; }
         }
-
     }
 }

@@ -1,14 +1,16 @@
-﻿using System;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using ReferenceProject.Exceptions;
+using ReferenceProject.Repo;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
 
 namespace ReferenceProject.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class ProductsController : ControllerBase
+    public class ProductsController: ControllerBase
     {
         Repo.IProductsRepo ProductsRepo { get; }
         IMapper Mapper { get; }
@@ -25,8 +27,15 @@ namespace ReferenceProject.Controllers
             return ProductsRepo.Get().Select(Mapper.Map<Dto.Product>);
         }
 
-        [HttpGet("action")]
-        public void Action()
+        [HttpGet]
+        [Route("{id}")]
+        public Dto.Product GetById(int id)
+        {
+            return Mapper.Map<Dto.Product>(ProductsRepo.GetById(id));
+        }
+
+        [HttpGet("ThrowAnException")]
+        public void ThrowAnException()
         {
             throw new Exception("Example exception");
         }

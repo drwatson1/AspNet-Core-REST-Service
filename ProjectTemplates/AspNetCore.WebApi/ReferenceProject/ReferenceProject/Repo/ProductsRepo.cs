@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using ReferenceProject.Exceptions;
 using ReferenceProject.Model;
 using System;
 using System.Collections.Generic;

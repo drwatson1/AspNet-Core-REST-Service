@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace ReferenceProject.Repo
+namespace ReferenceProject.Exceptions
 {
     [Serializable]
     internal class DuplicateKeyException : Exception
     {
         public DuplicateKeyException()
+            : this("Duplicate key")
         {
         }
 

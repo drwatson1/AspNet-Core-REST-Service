@@ -29,6 +29,21 @@ namespace ReferenceProject
             {
                 DotNetEnv.Env.Load();
             }
+
+            JsonConvert.DefaultSettings = () => 
+                new JsonSerializerSettings()
+                {
+                    ContractResolver = new CamelCasePropertyNamesContractResolver(),
+                    NullValueHandling = NullValueHandling.Ignore,
+                    DefaultValueHandling = DefaultValueHandling.Include,
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                    //Formatting = Formatting.Indented,
+#if DEBUG
+                    Formatting = Formatting.Indented
+#else
+                    Formatting = Formatting.None
+#endif
+            };
         }
 
         public IConfiguration Configuration { get; }
@@ -44,7 +59,8 @@ namespace ReferenceProject
                 // Add useful interface for accessing the IUrlHelper outside a controller.
                 .AddScoped<IUrlHelper>(x => x
                     .GetRequiredService<IUrlHelperFactory>()
-                    .GetUrlHelper(x.GetRequiredService<IActionContextAccessor>().ActionContext)).AddMvc()
+                    .GetUrlHelper(x.GetRequiredService<IActionContextAccessor>().ActionContext))
+                .AddMvc()
                 .AddJsonOptions(options =>
                 {
                     options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
@@ -91,8 +107,10 @@ namespace ReferenceProject
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app/*, IHostingEnvironment env*/)
         {
-            app.UseMiddleware<ExceptionMiddleware>()
-                .UseMiddleware<PreventResponseCachingMiddleware>();
+            // Use our exception handler middleware before any other handlers
+            app.UseExceptionHandler();
+
+            app.UseMiddleware<PreventResponseCachingMiddleware>();
 
             app.UseCors(builder => builder
                 .AllowAnyOrigin()
