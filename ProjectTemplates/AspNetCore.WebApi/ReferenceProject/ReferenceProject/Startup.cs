@@ -10,18 +10,21 @@ using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using ReferenceProject.Middleware;
 using ReferenceProject.Modules;
-using Serilog;
 
 namespace ReferenceProject
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration, IHostingEnvironment env)
+        ILogger<Startup> Logger { get; }
+
+        public Startup(IConfiguration configuration, IHostingEnvironment env, ILogger<Startup> logger)
         {
+            Logger = logger;
             Configuration = configuration;
 
             var envPath = Path.Combine(env.ContentRootPath, ".env");
@@ -37,7 +40,6 @@ namespace ReferenceProject
                     NullValueHandling = NullValueHandling.Ignore,
                     DefaultValueHandling = DefaultValueHandling.Include,
                     ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-                    //Formatting = Formatting.Indented,
 #if DEBUG
                     Formatting = Formatting.Indented
 #else
@@ -116,7 +118,7 @@ namespace ReferenceProject
 
             app.UseMvcWithDefaultRoute();
 
-            Log.Information("Server started");
+            Logger.LogInformation("Server started");
         }
     }
 }

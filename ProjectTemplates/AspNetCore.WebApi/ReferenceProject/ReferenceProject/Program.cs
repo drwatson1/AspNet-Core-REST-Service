@@ -22,11 +22,16 @@ namespace ReferenceProject
                 {
                     logging.ClearProviders();
 
+                    /*
+                     * You can use a global logger as this, but I don't recommend this way
                     Log.Logger = new LoggerConfiguration()
                         .ReadFrom.Configuration(context.Configuration)
                         .CreateLogger();
+                    */
 
-                    logging.AddSerilog();
+                    logging.AddSerilog(new LoggerConfiguration()
+                        .ReadFrom.Configuration(context.Configuration)
+                        .CreateLogger());
                 })
                 .ConfigureAppConfiguration(x => 
                 {
