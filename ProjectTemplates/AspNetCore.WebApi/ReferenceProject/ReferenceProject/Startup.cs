@@ -85,7 +85,8 @@ namespace ReferenceProject
         public void ConfigureContainer(ContainerBuilder builder)
         {
             // Add things to the Autofac ContainerBuilder.
-            ConfigureContainerCommon(builder);
+            builder.RegisterModule<DefaultModule>();
+            builder.RegisterModule(new ConfigurationModule(Configuration));
         }
 
         // This only gets called if your environment is Production. The
@@ -93,15 +94,10 @@ namespace ReferenceProject
         // one is called.
         public void ConfigureProductionContainer(ContainerBuilder builder)
         {
+            ConfigureContainer(builder);
+
             // Add things to the ContainerBuilder that are only for the
             // production environment.
-            ConfigureContainerCommon(builder);
-        }
-
-        public void ConfigureContainerCommon(ContainerBuilder builder)
-        {
-            builder.RegisterModule(new DefaultModule());
-            builder.RegisterModule(new ConfigurationModule(Configuration));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
