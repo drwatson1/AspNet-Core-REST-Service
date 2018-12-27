@@ -66,6 +66,7 @@ namespace ReferenceProject
                 .AddMvc(options =>
                 {
                     options.Filters.Add(new ValidateModelFilter());
+                    options.Filters.Add(new CacheControlFilter());
                 })
                 .AddJsonOptions(options =>
                 {
@@ -111,8 +112,6 @@ namespace ReferenceProject
         {
             // Use our exception handler middleware before any other handlers
             app.UseExceptionHandler();
-
-            app.UseMiddleware<PreventResponseCachingMiddleware>();
 
             app.UseCors(builder => builder
                 .AllowAnyOrigin()
