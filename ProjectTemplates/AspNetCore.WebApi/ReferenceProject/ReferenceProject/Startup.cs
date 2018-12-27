@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using ReferenceProject.Filters;
 using ReferenceProject.Middleware;
 using ReferenceProject.Modules;
 
@@ -62,7 +63,10 @@ namespace ReferenceProject
                 .AddScoped<IUrlHelper>(x => x
                     .GetRequiredService<IUrlHelperFactory>()
                     .GetUrlHelper(x.GetRequiredService<IActionContextAccessor>().ActionContext))
-                .AddMvc()
+                .AddMvc(options =>
+                {
+                    options.Filters.Add(new ValidateModelFilter());
+                })
                 .AddJsonOptions(options =>
                 {
                     options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
