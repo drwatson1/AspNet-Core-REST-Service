@@ -14,8 +14,11 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using ReferenceProject.Filters;
-using ReferenceProject.Middleware;
 using ReferenceProject.Modules;
+
+// TODO: Create and validate configuration in web.config:
+// https://www.talkingdotnet.com/how-to-increase-file-upload-size-asp-net-core/
+// https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/iis/?view=aspnetcore-2.1&tabs=aspnetcore2x#webconfig-file
 
 namespace ReferenceProject
 {
@@ -118,6 +121,9 @@ namespace ReferenceProject
                 .AllowAnyMethod()
                 .AllowAnyHeader()
                 .AllowCredentials());
+
+            // Options verb handler must be added after CORS
+            app.UseOptionsVerbHandler();
 
             app.UseMvcWithDefaultRoute();
 
