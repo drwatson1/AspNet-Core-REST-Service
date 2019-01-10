@@ -68,7 +68,7 @@ namespace ReferenceProject.Middleware
                 JsonConvert.SerializeObject(
                     new ErrorResponse(ex, Environment.IsDevelopment())));
 
-            if (context.Response.StatusCode == 500)
+            if (context.Response.StatusCode == StatusCodes.Status500InternalServerError)
             {
                 Logger.LogError(ex, "Unhandled exception occurred");
             }
