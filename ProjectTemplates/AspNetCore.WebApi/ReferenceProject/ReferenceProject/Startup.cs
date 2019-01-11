@@ -66,7 +66,7 @@ namespace ReferenceProject
                 .AddScoped<IUrlHelper>(x => x
                     .GetRequiredService<IUrlHelperFactory>()
                     .GetUrlHelper(x.GetRequiredService<IActionContextAccessor>().ActionContext))
-                .AddMvc(options =>
+                .AddMvcCore(options =>
                 {
                     options.Filters.Add(new ValidateModelFilter());
                     options.Filters.Add(new CacheControlFilter());

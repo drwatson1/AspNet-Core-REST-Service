@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using ReferenceProject.Exceptions;
 using ReferenceProject.Repo;
 using System;
 using System.Collections.Generic;
