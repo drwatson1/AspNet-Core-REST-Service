@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using ReferenceProject.Repo;
 using System;
 using System.Collections.Generic;
@@ -9,6 +11,7 @@ namespace ReferenceProject.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    [Produces("application/json")]
     public class ProductsController: ControllerBase
     {
         Repo.IProductsRepo ProductsRepo { get; }
@@ -20,12 +23,22 @@ namespace ReferenceProject.Controllers
             ProductsRepo = productsRepo ?? throw new ArgumentNullException(nameof(productsRepo));
         }
 
+        /// <summary>
+        /// Get all products
+        /// </summary>
+        /// <response code="200">List of all of the products</response>
         [HttpGet]
         public IEnumerable<Dto.Product> Get()
         {
             return ProductsRepo.Get().Select(Mapper.Map<Dto.Product>);
         }
 
+        /// <summary>
+        /// Get product by id
+        /// </summary>
+        /// <param name="id">Product id</param>
+        /// <response code="200">Product with the specified id</response>
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet]
         [Route("{id}")]
         public Dto.Product GetById(int id)
@@ -33,8 +46,11 @@ namespace ReferenceProject.Controllers
             return Mapper.Map<Dto.Product>(ProductsRepo.GetById(id));
         }
 
+        /// <summary>
+        /// Example of an exception handling
+        /// </summary>
         [HttpGet("ThrowAnException")]
-        public void ThrowAnException()
+        public IActionResult ThrowAnException()
         {
             throw new Exception("Example exception");
         }

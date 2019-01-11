@@ -5,25 +5,35 @@ namespace ReferenceProject.Controllers
 {
 #pragma warning disable RECS0154 // Parameter is never used
 
+    /// <summary>
+    /// Standart ASP.Net Core Example Controller
+    /// </summary>
     [Route("[controller]")]
     [ApiController]
+    [Produces("application/json")]
     public class ValuesController : ControllerBase
     {
-        // GET values
+        /// <summary>
+        /// Get values
+        /// </summary>
+        /// <response code="200">List of values</response>
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
         }
 
         // GET values/5
         [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        public string Get(int id)
         {
             return "value";
         }
 
-        // POST values
+        /// <summary>
+        /// Add new value
+        /// </summary>
+        /// <param name="value">New value</param>
         [HttpPost]
         public void Post([FromBody] string value)
         {

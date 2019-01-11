@@ -1,5 +1,4 @@
-﻿using System.IO;
-using Autofac;
+﻿using Autofac;
 using Autofac.Configuration;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
@@ -15,6 +14,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using ReferenceProject.Filters;
 using ReferenceProject.Modules;
+using System.IO;
 
 // TODO: Create and validate configuration in web.config:
 // https://www.talkingdotnet.com/how-to-increase-file-upload-size-asp-net-core/
@@ -37,7 +37,7 @@ namespace ReferenceProject
                 DotNetEnv.Env.Load();
             }
 
-            JsonConvert.DefaultSettings = () => 
+            JsonConvert.DefaultSettings = () =>
                 new JsonSerializerSettings()
                 {
                     ContractResolver = new CamelCasePropertyNamesContractResolver(),
@@ -49,7 +49,7 @@ namespace ReferenceProject
 #else
                     Formatting = Formatting.None
 #endif
-            };
+                };
         }
 
         public IConfiguration Configuration { get; }
@@ -71,6 +71,8 @@ namespace ReferenceProject
                     options.Filters.Add(new ValidateModelFilter());
                     options.Filters.Add(new CacheControlFilter());
                 })
+                .AddApiExplorer()
+                .AddJsonFormatters()
                 .AddJsonOptions(options =>
                 {
                     options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
@@ -85,7 +87,9 @@ namespace ReferenceProject
                 })
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddAutoMapper();
+            services
+                .AddAutoMapper()
+                .AddSwagger();
         }
 
         // ConfigureContainer is where you can register things directly
@@ -122,8 +126,9 @@ namespace ReferenceProject
                 .AllowAnyHeader()
                 .AllowCredentials());
 
-            // Options verb handler must be added after CORS
-            app.UseOptionsVerbHandler();
+            app
+                .UseOptionsVerbHandler()    // Options verb handler must be added after CORS
+                .UseSwaggerWithOptions();
 
             app.UseMvcWithDefaultRoute();
 
