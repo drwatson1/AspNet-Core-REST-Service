@@ -9,9 +9,6 @@ using System.Linq;
 
 namespace ReferenceProject.Controllers
 {
-    /// <summary>
-    /// Products Controller
-    /// </summary>
     [Route("[controller]")]
     [ApiController]
     [Produces("application/json")]
