@@ -3,6 +3,7 @@
     /// <summary>
     /// DTO for reading product (-s)
     /// </summary>
+
     public class Product
     {
         /// <summary>
@@ -13,6 +14,7 @@
         /// <summary>
         /// Product name
         /// </summary>
+        /// <example>lime</example>
         public string Name { get; set; }
     }
 }
