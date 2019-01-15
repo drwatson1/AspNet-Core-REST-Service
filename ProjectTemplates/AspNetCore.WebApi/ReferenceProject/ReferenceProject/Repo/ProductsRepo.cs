@@ -34,7 +34,7 @@ namespace ReferenceProject.Repo
 
             if (products.Any(x => x.Id == p.Id))
             {
-                throw new DuplicateKeyException($"Can't create object of type {nameof(Product)} with the key '{p.Id}'. Object with the same key is already exists");
+                throw new DuplicateKeyException($"Can't create an object of a type {nameof(Product)} with the key '{p.Id}'. The object with the same key is already exists");
             }
 
             products.Add(Mapper.Map<Product>(p));
@@ -45,7 +45,7 @@ namespace ReferenceProject.Repo
             var p = products.FirstOrDefault(x => x.Id == id);
             if (p == null)
             {
-                throw new KeyNotFoundException($"Object of type '{nameof(Product)}' with the key '{id}' not found");
+                throw new KeyNotFoundException($"An object of a type '{nameof(Product)}' with the key '{id}' not found");
             }
 
             products.RemoveAll(x => x.Id == p.Id);
@@ -59,7 +59,7 @@ namespace ReferenceProject.Repo
             var stored = products.FirstOrDefault(x => x.Id == p.Id);
             if (stored == null)
             {
-                throw new KeyNotFoundException($"Object of type '{nameof(Product)}' with the key '{p.Id}' not found");
+                throw new KeyNotFoundException($"An object of a type '{nameof(Product)}' with the key '{p.Id}' not found");
             }
 
             products.RemoveAll(x => x.Id == stored.Id);

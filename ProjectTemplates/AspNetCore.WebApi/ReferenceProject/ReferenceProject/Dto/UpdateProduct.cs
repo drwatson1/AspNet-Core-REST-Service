@@ -1,15 +1,10 @@
 ﻿namespace ReferenceProject.Dto
 {
     /// <summary>
-    /// DTO for reading product (-s)
+    /// DTO for creating and updating product
     /// </summary>
-    public class Product
+    public class UpdateProduct
     {
-        /// <summary>
-        /// Product id
-        /// </summary>
-        public int Id { get; set; }
-
         /// <summary>
         /// Product name
         /// </summary>

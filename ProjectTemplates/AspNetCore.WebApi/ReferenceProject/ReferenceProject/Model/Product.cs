@@ -8,6 +8,11 @@ namespace ReferenceProject.Model
         {
         }
 
+        public Product(int id)
+        {
+            Id = id;
+        }
+
         public Product(int id, string name)
         {
             Id = id;

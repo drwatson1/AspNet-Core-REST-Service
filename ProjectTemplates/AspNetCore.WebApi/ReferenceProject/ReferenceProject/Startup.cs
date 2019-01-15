@@ -16,10 +16,8 @@ using ReferenceProject.Filters;
 using ReferenceProject.Modules;
 using System.IO;
 
-// TODO: Create and validate configuration in web.config:
 // https://www.talkingdotnet.com/how-to-increase-file-upload-size-asp-net-core/
 // https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/iis/?view=aspnetcore-2.1&tabs=aspnetcore2x#webconfig-file
-
 namespace ReferenceProject
 {
     public class Startup
