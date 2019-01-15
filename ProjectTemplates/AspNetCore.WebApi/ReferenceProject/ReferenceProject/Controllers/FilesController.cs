@@ -11,6 +11,13 @@ namespace ReferenceProject.Controllers
     [ApiController]
     public class FilesController: ControllerBase
     {
+        /// <summary>
+        /// Upload a file
+        /// </summary>
+        /// <remarks>
+        /// Play around with file size. Try to upload a file more 1048576 bytes length
+        /// </remarks>
+        /// <param name="file">A file to upload</param>
         [HttpPost]
         [Route("upload")]
         [RequestSizeLimit(1048576)]
