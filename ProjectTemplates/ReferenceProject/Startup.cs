@@ -27,7 +27,7 @@ namespace ReferenceProject
         public Startup(IConfiguration configuration, IHostingEnvironment env, ILogger<Startup> logger)
         {
             Logger = logger;
-            Configuration = configuration;
+            Startup.Configuration = configuration;
 
             var envPath = Path.Combine(env.ContentRootPath, ".env");
             if (File.Exists(envPath))
@@ -50,7 +50,7 @@ namespace ReferenceProject
                 };
         }
 
-        public IConfiguration Configuration { get; }
+        public static IConfiguration Configuration { get; private set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
