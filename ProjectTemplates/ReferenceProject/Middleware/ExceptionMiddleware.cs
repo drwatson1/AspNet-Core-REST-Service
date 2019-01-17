@@ -10,13 +10,14 @@ using ReferenceProject.Exceptions;
 namespace ReferenceProject.Middleware
 {
     /// <summary>
-    /// Middleware to handle unhandled exceptions. 
-    /// It separates exceptions based on their type and returns different status codes and answers based on it, instead of 500 Internal Server Error code in all cases
+    /// Middleware to handle exceptions.
+    /// It separates exceptions based on their type and returns different status codes and answers based on it, instead of 500 Internal Server Error code in all cases.
+    /// In addition, it writes them in the log.
     /// </summary>
     /// <remarks>
     /// There is another way to do this - an exception filter.
     /// However, a middleware is a preferred way to achieve this according to the official documentation.
-    /// To learn more see https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/filters?view=aspnetcore-2.2#exception-filters
+    /// To learn more see https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/filters?view=aspnetcore-2.1#exception-filters
     /// </remarks>
     public class ExceptionMiddleware
     {
@@ -41,7 +42,7 @@ namespace ReferenceProject.Middleware
             catch (Exception ex)
             {
                 // If context.Response.HasStarted == true, then we can't write to the response stream anymore. So we have to restore the body.
-                // If we were don't do that we get an exception.
+                // If we don't do that we get an exception.
                 context.Response.Body = body;
                 await HandleExceptionAsync(context, ex);
             }
@@ -54,7 +55,7 @@ namespace ReferenceProject.Middleware
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = statusCode;
 
-            // We can decide what the status code should be
+            // We can decide what the status code should return
             if (ex is KeyNotFoundException)
             {
                 context.Response.StatusCode = StatusCodes.Status404NotFound;
