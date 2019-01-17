@@ -16,7 +16,7 @@ namespace ReferenceProject.Controllers
     {
         Repo.IProductsRepo ProductsRepo { get; }
         IMapper Mapper { get; }
-        ILogger<ProductsController> Logger { get; }
+        ILogger Logger { get; }
 
         public ProductsController(IProductsRepo productsRepo, IMapper mapper, ILogger<ProductsController> logger)
         {
