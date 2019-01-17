@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Formatters;
+using Microsoft.Extensions.Logging;
 using ReferenceProject.Repo;
 using System;
 using System.Collections.Generic;
@@ -16,9 +16,11 @@ namespace ReferenceProject.Controllers
     {
         Repo.IProductsRepo ProductsRepo { get; }
         IMapper Mapper { get; }
+        ILogger<ProductsController> Logger { get; }
 
-        public ProductsController(Repo.IProductsRepo productsRepo, IMapper mapper)
+        public ProductsController(IProductsRepo productsRepo, IMapper mapper, ILogger<ProductsController> logger)
         {
+            Logger = logger ?? throw new ArgumentNullException(nameof(logger));
             Mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             ProductsRepo = productsRepo ?? throw new ArgumentNullException(nameof(productsRepo));
         }
@@ -61,7 +63,12 @@ namespace ReferenceProject.Controllers
             var newProduct = new Model.Product(id);
             Mapper.Map(newProductDto, newProduct);
             ProductsRepo.Create(newProduct);
-            return Created($"{id}", Mapper.Map<Dto.Product>(ProductsRepo.GetById(id)));
+
+            var createdProduct = ProductsRepo.GetById(id);
+
+            Logger.LogInformation("New product was created: {@product}", createdProduct);
+
+            return Created($"{id}", Mapper.Map<Dto.Product>(createdProduct));
         }
 
         /// <summary>
