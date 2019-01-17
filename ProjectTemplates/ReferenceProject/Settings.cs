@@ -15,7 +15,7 @@ namespace ReferenceProject
 
         public static class Services
         {
-            public static string CoolService { get; } = TrimUrl(Get("CoolServiceEndpoint"));  // %ORIGIN% will be substituted with the value from an environment variable
+            public static string CoolService { get; } = TrimUrl(Get("CoolServiceEndpoint"));  // %ENDPOINT_HOST% will be substituted with the value from an environment variable
             public static string AnotherService { get; } = TrimUrl(Get("AnotherServiceEndpoint"));
         }
     }
