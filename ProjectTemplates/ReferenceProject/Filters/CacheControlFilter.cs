@@ -2,6 +2,10 @@
 
 namespace ReferenceProject.Filters
 {
+    /// <summary>
+    /// Filter to add header Cache-Control to responses
+    /// </summary>
+    /// <remarks>See: https://github.com/drwatson1/AspNet-Core-REST-Service/wiki#cache-control</remarks>
     public class CacheControlFilter: IResultFilter
     {
         public void OnResultExecuted(ResultExecutedContext context)

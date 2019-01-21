@@ -3,9 +3,12 @@ using System.Threading.Tasks;
 
 namespace ReferenceProject.Middleware
 {
-    // https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
-    // https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#Preflighted_requests
-    // https://developer.mozilla.org/ru/docs/Web/HTTP/Methods/OPTIONS
+    /// <summary>
+    /// OPTIONS HTTP-method handler
+    /// </summary>
+    /// <remarks>
+    /// See:     https://github.com/drwatson1/AspNet-Core-REST-Service/wiki#cross-origin-resource-sharing-cors-and-preflight-requests
+    /// </remarks>
     public class OptionsVerbMiddleware
     {
         RequestDelegate Next { get; }

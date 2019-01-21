@@ -3,6 +3,10 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace ReferenceProject.Filters
 {
+    /// <summary>
+    /// Filter to check is a model valid
+    /// </summary>
+    /// <remarks>See: https://github.com/drwatson1/AspNet-Core-REST-Service/wiki#model-validation</remarks>
     public class ValidateModelFilter: IActionFilter
     {
         public void OnActionExecuted(ActionExecutedContext context)

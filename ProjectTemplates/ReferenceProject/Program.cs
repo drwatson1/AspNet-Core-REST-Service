@@ -24,6 +24,7 @@ namespace ReferenceProject
 
                     /*
                      * You can use a global logger as this, but I don't recommend this way
+                     * More information: https://github.com/drwatson1/AspNet-Core-REST-Service/wiki#logging
                     Log.Logger = new LoggerConfiguration()
                         .ReadFrom.Configuration(context.Configuration)
                         .CreateLogger();

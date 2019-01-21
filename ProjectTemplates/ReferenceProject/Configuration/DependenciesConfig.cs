@@ -8,6 +8,12 @@ namespace ReferenceProject
 {
     public static class DependenciesConfig
     {
+        /// <summary>
+        /// Add Swagger middleware
+        /// </summary>
+        /// <remarks>
+        /// See: https://github.com/drwatson1/AspNet-Core-REST-Service/wiki#documenting-api
+        /// </remarks>
         public static IServiceCollection AddSwagger(this IServiceCollection services)
         {
             // Register the Swagger generator, defining 1 or more Swagger documents

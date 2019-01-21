@@ -18,6 +18,8 @@ namespace ReferenceProject.Middleware
     /// There is another way to do this - an exception filter.
     /// However, a middleware is a preferred way to achieve this according to the official documentation.
     /// To learn more see https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/filters?view=aspnetcore-2.1#exception-filters
+    /// 
+    /// See also: https://github.com/drwatson1/AspNet-Core-REST-Service/wiki#unhandled-exceptions-handling
     /// </remarks>
     public class ExceptionMiddleware
     {

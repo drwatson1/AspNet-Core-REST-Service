@@ -4,6 +4,12 @@ namespace ReferenceProject
 {
     public static class MiddlewareConfig
     {
+        /// <summary>
+        /// Use swagger UI and endpoint
+        /// </summary>
+        /// <remarks>
+        /// See: https://github.com/drwatson1/AspNet-Core-REST-Service/wiki#documenting-api
+        /// </remarks>
         public static IApplicationBuilder UseSwaggerWithOptions(this IApplicationBuilder app)
         {
             // Enable middleware to serve generated Swagger as a JSON endpoint.
