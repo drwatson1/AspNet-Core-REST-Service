@@ -2,7 +2,7 @@
 
 The repository contains a ready to use preconfigured project template for MS Visual Studio 2017 to create fully functional production-ready cross-platform RESTful services based on ASP.Net Core 2.1.
 
-    Note! If you are looking for classic ASP.Net services with WebAPI2 and other stuff like that, please, check out a project [
+> Note! If you are looking for classic ASP.Net services with WebAPI2 and other stuff like that, please, check out a project [
 ASP.Net WebApi2 Application with OWIN](https://github.com/drwatson1/AspNet-WebApi).
 
 This template is intended to provide you an almost all that you need for creating RESTful services. The project doesn't contain any UI stuff, like React or Angular libraries, npm, Razor views, as well as any problem domain specific things like EnityFramework, some "right" or "neat" project structure or even a number of projects, each for the specific purpose (for example, service itself, domain logic, data access, testing and so on) as it does some other templates. There are too many areas where ASP.Net Core services can be used, so it can hardly be offered anything related to domain areas to fit all of these project types.
