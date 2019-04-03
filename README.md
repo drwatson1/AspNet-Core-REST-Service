@@ -1,6 +1,6 @@
 # ASP.Net Core RESTful Service Template
 
-The repository contains a ready to use preconfigured project template for MS Visual Studio 2017 to create fully functional production-ready cross-platform RESTful services based on ASP.Net Core 2.1.
+The repository contains a ready to use preconfigured project template for MS Visual Studio 2017 and 2019 to create fully functional production-ready cross-platform RESTful services based on ASP.Net Core 2.1.
 
 > Note! If you are looking for classic ASP.Net services with WebAPI2 and other stuff like that, please, check out a project [
 ASP.Net WebApi2 Application with OWIN](https://github.com/drwatson1/AspNet-WebApi).
