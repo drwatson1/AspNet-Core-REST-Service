@@ -18,6 +18,6 @@ However, some things must be implemented or configured in almost each of the pro
 - Ability to use environment variables in configuration options and support for '.env' files to easy switching between different environments (thanks to DotNetEnv)
 - ... and some boilerplate code
 
-Read [Wiki](https://github.com/drwatson1/AspNet-Core-REST-Service/wiki) for more information.
+Read the [Wiki](https://github.com/drwatson1/AspNet-Core-REST-Service/wiki) for more information.
 
-Let me know, what do think. Any suggestions and bug reports are very appreciated.
+Let me know, what do you think. Any suggestions and bug reports are very appreciated.
