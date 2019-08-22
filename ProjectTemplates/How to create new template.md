@@ -10,7 +10,15 @@ After making any changes do:
 1. Extract all files from the created zip-archive to any folder as you want. Typically, the file can be found in "C:\Users\<YOU>\Documents\Visual Studio 2017\My Exported Templates" folder
 1. Open a file "MyTemplate.vstemplate"
 1. Replace content of the tag `DefaultName` in the section `TemplateData` to "ASPNetCore.Service" (without quotation)
-1. Add tag `NumberOfParentCategoriesToRollUp` to the same section with value '1': `<NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>`
+1. Add the following tags to tha same section:
+```xml
+    <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
+    <LanguageTag>C#</LanguageTag>
+    <PlatformTag>windows</PlatformTag>
+    <PlatformTag>linux</PlatformTag>
+    <ProjectTypeTag>web</ProjectTypeTag>
+    <ProjectTypeTag>RESTful Service</ProjectTypeTag>
+```
 1. Add all files from the folder to zip-archive with a name "ASP.Net Core RESTful Service.zip". All added files must be in the root of the archive
 1. Copy this file to "ProjectTemplates\ReferenceProjectVSIX\ProjectTemplates\CSharp\.NET Core" folder and replace an existing one
 1. Go to VS, expand a ReferenceProjectVSIX project and double click on source.extension.vsixmanifest file
