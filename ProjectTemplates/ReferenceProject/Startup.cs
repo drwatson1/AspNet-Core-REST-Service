@@ -2,6 +2,7 @@
 using Autofac.Configuration;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -9,6 +10,7 @@ using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -28,7 +30,7 @@ namespace ReferenceProject
     {
         ILogger<Startup> Logger { get; }
 
-        public Startup(IConfiguration configuration, IHostingEnvironment env, ILogger<Startup> logger)
+        public Startup(IConfiguration configuration, IWebHostEnvironment env, ILogger<Startup> logger)
         {
             Logger = logger;
             Startup.Configuration = configuration;
@@ -76,6 +78,9 @@ namespace ReferenceProject
                     options.Filters.Add(new CacheControlFilter());  // Add "Cache-Control" header. See: https://github.com/drwatson1/AspNet-Core-REST-Service/wiki#cache-control
                 })
                 .AddApiExplorer()
+				/*
+				 * TODO: Must be removed
+				 * This code is obsolete now: https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-migrate-from-newtonsoft-how-to#differences-in-default-jsonserializer-behavior-compared-to-newtonsoftjson
                 .AddJsonFormatters()    // See: https://github.com/drwatson1/AspNet-Core-REST-Service/wiki#content-formatting
                 .AddJsonOptions(options =>
                 {
@@ -88,13 +93,17 @@ namespace ReferenceProject
 #else
                     options.SerializerSettings.Formatting = Formatting.None;
 #endif
-                })
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+                })*/
+				.SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
             services
                 .AddAutoMapper(typeof(Startup)) // Check out Configuration/AutoMapperProfiles/DefaultProfile to do actual configuration. See: https://github.com/drwatson1/AspNet-Core-REST-Service/wiki#automapper
                 .AddSwagger();                  // Check out Configuration/DependenciesConfig.cs/AddSwagger to do actual configuration. See: https://github.com/drwatson1/AspNet-Core-REST-Service/wiki#documenting-api
-        }
+
+			services.AddRouting();
+			services.AddControllers();
+			services.AddHealthChecks();
+		}
 
         /// <summary>
         /// Configure Autofac DI-container
@@ -135,26 +144,31 @@ namespace ReferenceProject
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app/*, IHostingEnvironment env*/)
+        public void Configure(IApplicationBuilder app)
         {
             // Use an exception handler middleware before any other handlers
             // See: https://github.com/drwatson1/AspNet-Core-REST-Service/wiki#unhandled-exceptions-handling
             app.UseExceptionHandler();
 
-            // See: https://github.com/drwatson1/AspNet-Core-REST-Service/wiki#cross-origin-resource-sharing-cors-and-preflight-requests
-            app.UseCors(builder => builder
+			app.UseRouting();
+
+			// See: https://github.com/drwatson1/AspNet-Core-REST-Service/wiki#cross-origin-resource-sharing-cors-and-preflight-requests
+			app.UseCors(builder => builder
                 .AllowAnyOrigin()
                 .AllowAnyMethod()
-                .AllowAnyHeader()
-                .AllowCredentials());
+                .AllowAnyHeader());
 
             app
                 .UseOptionsVerbHandler()    // Options verb handler must be added after CORS. See: https://github.com/drwatson1/AspNet-Core-REST-Service/wiki#cross-origin-resource-sharing-cors-and-preflight-requests
                 .UseSwaggerWithOptions();   // Check out Configuration/MiddlewareConfig.cs/UseSwaggerWithOptions to do actual configuration. See: https://github.com/drwatson1/AspNet-Core-REST-Service/wiki#documenting-api
 
-            app.UseMvcWithDefaultRoute();
+			app.UseEndpoints(endpoints =>
+			{
+				endpoints.MapDefaultControllerRoute();
+				endpoints.MapHealthChecks("/health"); // TODO: Must be documented: https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/health-checks?view=aspnetcore-3.1
+			});
 
-            Logger.LogInformation("Server started");
+			Logger.LogInformation("Server started");
         }
     }
 }
