@@ -75,9 +75,9 @@ namespace ReferenceProject
                     options.Filters.Add(new CacheControlFilter());  // Add "Cache-Control" header. See: https://github.com/drwatson1/AspNet-Core-REST-Service/wiki#cache-control
                 })
                 .AddApiExplorer()
-				/*
-				 * TODO: Must be removed
-				 * This code is obsolete now: https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-migrate-from-newtonsoft-how-to#differences-in-default-jsonserializer-behavior-compared-to-newtonsoftjson
+                /*
+                 * TODO: Must be removed
+                 * This code is obsolete now: https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-migrate-from-newtonsoft-how-to#differences-in-default-jsonserializer-behavior-compared-to-newtonsoftjson
                 .AddJsonFormatters()    // See: https://github.com/drwatson1/AspNet-Core-REST-Service/wiki#content-formatting
                 .AddJsonOptions(options =>
                 {
@@ -91,16 +91,16 @@ namespace ReferenceProject
                     options.SerializerSettings.Formatting = Formatting.None;
 #endif
                 })*/
-				.SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
             services
                 .AddAutoMapper(typeof(Startup)) // Check out Configuration/AutoMapperProfiles/DefaultProfile to do actual configuration. See: https://github.com/drwatson1/AspNet-Core-REST-Service/wiki#automapper
                 .AddSwagger();                  // Check out Configuration/DependenciesConfig.cs/AddSwagger to do actual configuration. See: https://github.com/drwatson1/AspNet-Core-REST-Service/wiki#documenting-api
 
-			services.AddRouting();
-			services.AddControllers();
-			services.AddHealthChecks();
-		}
+            services.AddRouting();
+            services.AddControllers();
+            services.AddHealthChecks();
+        }
 
         /// <summary>
         /// Configure Autofac DI-container
@@ -147,10 +147,10 @@ namespace ReferenceProject
             // See: https://github.com/drwatson1/AspNet-Core-REST-Service/wiki#unhandled-exceptions-handling
             app.UseExceptionHandler();
 
-			app.UseRouting();
+            app.UseRouting();
 
-			// See: https://github.com/drwatson1/AspNet-Core-REST-Service/wiki#cross-origin-resource-sharing-cors-and-preflight-requests
-			app.UseCors(builder => builder
+            // See: https://github.com/drwatson1/AspNet-Core-REST-Service/wiki#cross-origin-resource-sharing-cors-and-preflight-requests
+            app.UseCors(builder => builder
                 .AllowAnyOrigin()
                 .AllowAnyMethod()
                 .AllowAnyHeader());
@@ -159,13 +159,13 @@ namespace ReferenceProject
                 .UseOptionsVerbHandler()    // Options verb handler must be added after CORS. See: https://github.com/drwatson1/AspNet-Core-REST-Service/wiki#cross-origin-resource-sharing-cors-and-preflight-requests
                 .UseSwaggerWithOptions();   // Check out Configuration/MiddlewareConfig.cs/UseSwaggerWithOptions to do actual configuration. See: https://github.com/drwatson1/AspNet-Core-REST-Service/wiki#documenting-api
 
-			app.UseEndpoints(endpoints =>
-			{
-				endpoints.MapDefaultControllerRoute();
-				endpoints.MapHealthChecks(Constants.Health.EndPoint); // TODO: Must be documented: https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/health-checks?view=aspnetcore-3.1
-			});
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapDefaultControllerRoute();
+                endpoints.MapHealthChecks(Constants.Health.EndPoint); // TODO: Must be documented: https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/health-checks?view=aspnetcore-3.1
+            });
 
-			logger.LogInformation("Server configuration is completed");
+            logger.LogInformation("Server configuration is completed");
         }
     }
 }

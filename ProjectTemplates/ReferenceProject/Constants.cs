@@ -9,9 +9,9 @@
             public static string Version => "v1";
         }
 
-		public static class Health
-		{
-			public static string EndPoint => "/health";
-		}
+        public static class Health
+        {
+            public static string EndPoint => "/health";
+        }
     }
 }
