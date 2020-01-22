@@ -28,11 +28,8 @@ namespace ReferenceProject
 {
     public class Startup
     {
-        ILogger<Startup> Logger { get; }
-
-        public Startup(IConfiguration configuration, IWebHostEnvironment env, ILogger<Startup> logger)
+        public Startup(IConfiguration configuration, IHostEnvironment env)
         {
-            Logger = logger;
             Startup.Configuration = configuration;
 
             // https://github.com/drwatson1/AspNet-Core-REST-Service/wiki#using-environment-variables-in-configuration-options
@@ -144,7 +141,7 @@ namespace ReferenceProject
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app)
+        public void Configure(IApplicationBuilder app, ILogger<Startup> logger)
         {
             // Use an exception handler middleware before any other handlers
             // See: https://github.com/drwatson1/AspNet-Core-REST-Service/wiki#unhandled-exceptions-handling
@@ -168,7 +165,7 @@ namespace ReferenceProject
 				endpoints.MapHealthChecks(Constants.Health.EndPoint); // TODO: Must be documented: https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/health-checks?view=aspnetcore-3.1
 			});
 
-			Logger.LogInformation("Server started");
+			logger.LogInformation("Server configuration is completed");
         }
     }
 }

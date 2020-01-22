@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Configuration;
 using Serilog;
+using Microsoft.Extensions.Hosting;
 
 namespace ReferenceProject
 {
@@ -14,10 +15,9 @@ namespace ReferenceProject
 			CreateHostBuilder(args).Build().Run();
 		}
 
-		// TODO: WebHost -> Host: https://docs.microsoft.com/en-us/aspnet/core/migration/22-to-30?view=aspnetcore-3.1&tabs=visual-studio#hostbuilder-replaces-webhostbuilder
-		public static IWebHostBuilder CreateHostBuilder(string[] args) =>
-			WebHost.CreateDefaultBuilder(args)
-				.ConfigureServices(services => services.AddAutofac())
+		public static IHostBuilder CreateHostBuilder(string[] args) =>
+			Host.CreateDefaultBuilder(args)
+				.UseServiceProviderFactory(new AutofacServiceProviderFactory())
 				.ConfigureLogging((context, logging) =>
 				{
 					logging.ClearProviders();
@@ -38,6 +38,9 @@ namespace ReferenceProject
 				{
 					x.AddEnvironmentVariables();
 				})
-				.UseStartup<Startup>();
+				.ConfigureWebHostDefaults(webBuilder =>
+				{
+					webBuilder.UseStartup<Startup>();
+				});
 	}
 }

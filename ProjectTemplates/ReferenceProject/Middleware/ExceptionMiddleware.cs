@@ -26,9 +26,9 @@ namespace ReferenceProject.Middleware
 	{
 		RequestDelegate Next { get; }
 		ILogger Logger { get; }
-		IWebHostEnvironment Environment { get; }
+		IHostEnvironment Environment { get; }
 
-		public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger, IWebHostEnvironment environment)
+		public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger, IHostEnvironment environment)
 		{
 			Environment = environment ?? throw new ArgumentNullException(nameof(environment));
 			Logger = logger ?? throw new ArgumentNullException(nameof(logger));
