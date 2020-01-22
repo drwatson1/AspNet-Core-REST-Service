@@ -75,22 +75,6 @@ namespace ReferenceProject
                     options.Filters.Add(new CacheControlFilter());  // Add "Cache-Control" header. See: https://github.com/drwatson1/AspNet-Core-REST-Service/wiki#cache-control
                 })
                 .AddApiExplorer()
-                /*
-                 * TODO: Must be removed
-                 * This code is obsolete now: https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-migrate-from-newtonsoft-how-to#differences-in-default-jsonserializer-behavior-compared-to-newtonsoftjson
-                .AddJsonFormatters()    // See: https://github.com/drwatson1/AspNet-Core-REST-Service/wiki#content-formatting
-                .AddJsonOptions(options =>
-                {
-                    options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
-                    options.SerializerSettings.DefaultValueHandling = DefaultValueHandling.Include;
-                    options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-#if DEBUG
-                    options.SerializerSettings.Formatting = Formatting.Indented;
-#else
-                    options.SerializerSettings.Formatting = Formatting.None;
-#endif
-                })*/
                 .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
             services
@@ -162,7 +146,7 @@ namespace ReferenceProject
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapDefaultControllerRoute();
-                endpoints.MapHealthChecks(Constants.Health.EndPoint); // TODO: Must be documented: https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/health-checks?view=aspnetcore-3.1
+                endpoints.MapHealthChecks(Constants.Health.EndPoint); // See: https://github.com/drwatson1/AspNet-Core-REST-Service/wiki#health-checks
             });
 
             logger.LogInformation("Server configuration is completed");
