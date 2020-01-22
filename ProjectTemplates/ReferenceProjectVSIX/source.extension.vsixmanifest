@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="ASP.Net Core RESTful Service Template-1" Version="1.3" Language="en-US" Publisher="Sergey Tregub" />
-        <DisplayName>ASP.Net Core 2.2 RESTful Service Template</DisplayName>
-        <Description xml:space="preserve">Project template to create production-ready RESTful service based on ASP.Net Core v.2.2. It contains preconfigured DI-container, logging, CORS, some boilerplate code and other features</Description>
+        <Identity Id="ASP.Net Core RESTful Service Template-1" Version="2.0" Language="en-US" Publisher="Sergey Tregub" />
+        <DisplayName>ASP.Net Core 3.1 RESTful Service Template</DisplayName>
+        <Description xml:space="preserve">Project template to create production-ready RESTful service based on ASP.Net Core 3.1. It contains preconfigured DI-container, logging, CORS, some boilerplate code and other features</Description>
         <MoreInfo>https://github.com/drwatson1/AspNet-Core-REST-Service</MoreInfo>
         <GettingStartedGuide>https://github.com/drwatson1/AspNet-Core-REST-Service/wiki</GettingStartedGuide>
-        <ReleaseNotes>1.3 Updated to .Net Core 2.2</ReleaseNotes>
         <Icon>Assets\logo.png</Icon>
         <Tags>asp-net-core restful-api vs2017 vs2019 visual-studio project-template</Tags>
     </Metadata>
