@@ -165,7 +165,7 @@ namespace ReferenceProject
 			app.UseEndpoints(endpoints =>
 			{
 				endpoints.MapDefaultControllerRoute();
-				endpoints.MapHealthChecks("/health"); // TODO: Must be documented: https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/health-checks?view=aspnetcore-3.1
+				endpoints.MapHealthChecks(Constants.Health.EndPoint); // TODO: Must be documented: https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/health-checks?view=aspnetcore-3.1
 			});
 
 			Logger.LogInformation("Server started");

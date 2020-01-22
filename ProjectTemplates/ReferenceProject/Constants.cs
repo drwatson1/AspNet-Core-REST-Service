@@ -8,5 +8,10 @@
             public static string ApiName => "My API";
             public static string Version => "v1";
         }
+
+		public static class Health
+		{
+			public static string EndPoint => "/health";
+		}
     }
 }
