@@ -13,10 +13,13 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using ReferenceProject.Filters;
 using ReferenceProject.Modules;
 using System.IO;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 /*
  * This project have been originally created from ASP.Net Core RESTful Service Template.
@@ -41,7 +44,8 @@ namespace ReferenceProject
 
             // See: https://github.com/drwatson1/AspNet-Core-REST-Service/wiki#content-formatting
             JsonConvert.DefaultSettings = () =>
-                new JsonSerializerSettings()
+            {
+                var settings = new JsonSerializerSettings()
                 {
                     ContractResolver = new CamelCasePropertyNamesContractResolver(),
                     NullValueHandling = NullValueHandling.Ignore,
@@ -53,6 +57,9 @@ namespace ReferenceProject
                     Formatting = Formatting.None
 #endif
                 };
+                settings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
+                return settings;
+            };
         }
 
         public static IConfiguration Configuration { get; private set; }
@@ -73,6 +80,12 @@ namespace ReferenceProject
                 {
                     options.Filters.Add(new ValidateModelFilter()); // Validate model. See: https://github.com/drwatson1/AspNet-Core-REST-Service/wiki#model-validation
                     options.Filters.Add(new CacheControlFilter());  // Add "Cache-Control" header. See: https://github.com/drwatson1/AspNet-Core-REST-Service/wiki#cache-control
+                })
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.IgnoreNullValues = true;
+                    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase));
+                    options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
                 })
                 .AddApiExplorer()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
