@@ -36,7 +36,7 @@ namespace ReferenceProject
             var envPath = Path.Combine(env.ContentRootPath, ".env");
             if (File.Exists(envPath))
             {
-                DotNetEnv.Env.Load();
+                DotNetEnv.Env.Load(envPath);
             }
 
             // See: https://github.com/drwatson1/AspNet-Core-REST-Service/wiki#content-formatting
