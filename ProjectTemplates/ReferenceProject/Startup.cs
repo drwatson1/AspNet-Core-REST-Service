@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Autofac.Configuration;
+using Autofac.Core;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
@@ -15,6 +16,7 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
+using ReferenceProject.Configuration;
 using ReferenceProject.Filters;
 using ReferenceProject.Modules;
 using System.IO;
@@ -94,6 +96,8 @@ namespace ReferenceProject
             services.AddRouting();
             services.AddControllers();
             services.AddHealthChecks();
+
+            services.AddSettings(Configuration);
         }
 
         /// <summary>
