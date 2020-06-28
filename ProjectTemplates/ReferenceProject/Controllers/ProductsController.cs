@@ -20,6 +20,7 @@ namespace ReferenceProject.Controllers
         IMapper Mapper { get; }
         ILogger Logger { get; }
 
+        // TODO: Describe what does IOptionsSnapshot mean and what other options are there.
         public ProductsController(IProductsRepo productsRepo, IOptionsSnapshot<Settings.Products> options, IMapper mapper, ILogger<ProductsController> logger)
         {
             Logger = logger ?? throw new ArgumentNullException(nameof(logger));

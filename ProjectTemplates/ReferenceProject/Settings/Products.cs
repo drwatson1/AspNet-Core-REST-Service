@@ -1,5 +1,6 @@
 ﻿namespace ReferenceProject.Settings
 {
+    // TODO: Describe Option Pattern
     public class Products
     {
         public const string SectionName = "Products";
