@@ -115,7 +115,13 @@ namespace ReferenceProject.Controllers
             throw new Exception("Example exception");
         }
 
+        /// <summary>
+        /// Demonstrate how to use application settings
+        /// </summary>
+        /// <returns>Application settings</returns>
+        /// <remarks>Don't do this in production! You can unintentionally unclose sensitive information</remarks>
         [HttpGet("Settings")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public Settings.Products GetSettings()
         {
             return Settings.Value;
