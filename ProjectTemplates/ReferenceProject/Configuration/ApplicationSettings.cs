@@ -6,10 +6,10 @@ namespace ReferenceProject.Configuration
 {
     public static class ApplicationSettings
     {
-        public static void AddSettings(this IServiceCollection services, IConfiguration Configuration)
+        public static void AddSettings(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddOptions<Settings.Products>()
-                .Bind(Configuration.GetSection(Settings.Products.SectionName))
+                .Bind(configuration.GetSection(Settings.Products.SectionName))
                 .SubstituteVariables();
         }
     }
