@@ -97,7 +97,7 @@ namespace ReferenceProject
             services.AddControllers();
             services.AddHealthChecks();
 
-            services.AddSettings(Configuration);
+            services.AddSettings();
         }
 
         /// <summary>
