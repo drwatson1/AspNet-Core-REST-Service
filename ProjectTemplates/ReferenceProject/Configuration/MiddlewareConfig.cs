@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.OpenApi.Models;
+using System.Collections.Generic;
 
 namespace ReferenceProject
 {
@@ -13,7 +15,22 @@ namespace ReferenceProject
         public static IApplicationBuilder UseSwaggerWithOptions(this IApplicationBuilder app)
         {
             // Enable middleware to serve generated Swagger as a JSON endpoint.
-            SwaggerBuilderExtensions.UseSwagger(app);
+            app.UseSwagger(c =>
+            {
+                c.PreSerializeFilters.Add((swaggerDoc, httpRequest) =>
+                {
+                    if (!httpRequest.Headers.ContainsKey("X-Forwarded-Host")) return;
+
+                    var serverUrl = $"{httpRequest.Headers["X-Forwarded-Proto"]}://" +
+                        $"{httpRequest.Headers["X-Forwarded-Host"]}" +
+                        $"{httpRequest.Headers["X-Forwarded-Prefix"]}";
+
+                    swaggerDoc.Servers = new List<OpenApiServer>()
+                    {
+                        new OpenApiServer { Url = serverUrl }
+                    };
+                });
+            });
 
             // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), 
             // specifying the Swagger JSON endpoint.
