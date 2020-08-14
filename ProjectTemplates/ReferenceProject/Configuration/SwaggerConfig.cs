@@ -7,7 +7,7 @@ using System.Reflection;
 
 namespace ReferenceProject
 {
-    public static class DependenciesConfig
+    public static class SwaggerConfig
     {
         /// <summary>
         /// Add Swagger middleware

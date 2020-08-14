@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using ReferenceProject.Repo;
 using System;
 using System.Collections.Generic;
@@ -14,15 +15,17 @@ namespace ReferenceProject.Controllers
     [Produces("application/json")]
     public class ProductsController: ControllerBase
     {
-        Repo.IProductsRepo ProductsRepo { get; }
+        IProductsRepo ProductsRepo { get; }
+        IOptionsSnapshot<Settings.Products> Settings { get; }
         IMapper Mapper { get; }
         ILogger Logger { get; }
 
-        public ProductsController(IProductsRepo productsRepo, IMapper mapper, ILogger<ProductsController> logger)
+        public ProductsController(IProductsRepo productsRepo, IOptionsSnapshot<Settings.Products> options, IMapper mapper, ILogger<ProductsController> logger)
         {
             Logger = logger ?? throw new ArgumentNullException(nameof(logger));
             Mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             ProductsRepo = productsRepo ?? throw new ArgumentNullException(nameof(productsRepo));
+            Settings = options ?? throw new ArgumentNullException(nameof(options));
         }
 
         /// <summary>
@@ -110,6 +113,18 @@ namespace ReferenceProject.Controllers
         public IActionResult ThrowAnException()
         {
             throw new Exception("Example exception");
+        }
+
+        /// <summary>
+        /// Demonstrate how to use application settings
+        /// </summary>
+        /// <returns>Application settings</returns>
+        /// <remarks>Don't do this in production! You can unintentionally unclose sensitive information</remarks>
+        [HttpGet("Settings")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public Settings.Products GetSettings()
+        {
+            return Settings.Value;
         }
     }
 }
