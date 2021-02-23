@@ -15,19 +15,19 @@ namespace ReferenceProject
         public static int  Main(string[] args)
         {
             try
-			{
+            {
                 CreateHostBuilder(args).Build().Run();
 
                 return 0;
             }
             catch(Exception ex)
-			{
+            {
                 var msg = "An unhandled exception occurred. The application will be closed";
                 Log.Logger?.Fatal(ex, msg);
                 if( Log.Logger == null )
-				{
+                {
                     Console.WriteLine(msg + Environment.NewLine + ex);
-				}
+                }
                 return 1;
             }
         }
