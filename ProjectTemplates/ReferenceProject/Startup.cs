@@ -37,10 +37,6 @@ namespace ReferenceProject
         {
             Startup.Configuration = configuration;
 
-            // https://github.com/drwatson1/AspNet-Core-REST-Service/wiki#using-environment-variables-in-configuration-options
-            var envPath = Path.Combine(env.ContentRootPath, ".env");
-            DotNetEnv.Env.Load(envPath);
-
             // See: https://github.com/drwatson1/AspNet-Core-REST-Service/wiki#content-formatting
             JsonConvert.DefaultSettings = () =>
             {

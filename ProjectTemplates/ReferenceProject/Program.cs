@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Configuration;
 using Serilog;
 using Microsoft.Extensions.Hosting;
+using System.IO;
 
 namespace ReferenceProject
 {
@@ -18,6 +19,14 @@ namespace ReferenceProject
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .UseServiceProviderFactory(new AutofacServiceProviderFactory())
+                .ConfigureAppConfiguration((hostingContext, config) =>
+                {
+                    // https://github.com/drwatson1/AspNet-Core-REST-Service/wiki#using-environment-variables-in-configuration-options
+                    var envPath = Path.Combine(hostingContext.HostingEnvironment.ContentRootPath, ".env");
+                    DotNetEnv.Env.Load(envPath);
+
+                    config.AddEnvironmentVariables();
+                })
                 .ConfigureLogging((context, logging) =>
                 {
                     logging.ClearProviders();
@@ -33,10 +42,6 @@ namespace ReferenceProject
                     logging.AddSerilog(new LoggerConfiguration()
                         .ReadFrom.Configuration(context.Configuration)
                         .CreateLogger());
-                })
-                .ConfigureAppConfiguration(x =>
-                {
-                    x.AddEnvironmentVariables();
                 })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
