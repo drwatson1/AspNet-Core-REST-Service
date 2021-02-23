@@ -37,3 +37,16 @@ Let me know, what do you think. Any suggestions and bug reports are very appreci
 Visit project [Wiki](https://github.com/drwatson1/AspNet-Core-REST-Service/wiki) pages to learn more about the template.
 
 Have fun and happy hacking!
+
+# Release Notes
+
+|Date | Version | Release Notes |
+|-----|---------|---------------|
+|2021-02-23|2.3|<p>- Load .env before Serilog initialization to make it possible to use environment variables in Serilog configuration options<p>- Catch and log unhandled exceptions <p>- Update NuGet packages to the latest versions|
+|2020-08-14|2.2|<p>- Allow Swagger to work behind a proxy<p>- Improve Application Settings with `Options Pattern` and [Configuration Extensions](https://github.com/drwatson1/configuration-extensions)<p>- Update NuGet packages to the latest versions
+|2020-01-22|2.1|<p>- Fix deploying to IIS<p>- Fix publishing the service
+|2020-01-22|2.0|<p>- Change target framework to .Net Core 3.1<p>- Add health check service
+|2020-01-21|1.3|<p>- Update target framework to .Net Core 2.2
+|2019-08-22|1.2|<p>- Project tags are added to make it simple to find this project template in a VS2019 project creation wizard<p>- Update NuGet packages to the latest versions|
+|2019-04-03|1.1|- Support VS2019
+|2019-01-21|1.0|- Initial version
