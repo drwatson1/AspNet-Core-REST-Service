@@ -6,14 +6,30 @@ using Microsoft.Extensions.Configuration;
 using Serilog;
 using Microsoft.Extensions.Hosting;
 using System.IO;
+using System;
 
 namespace ReferenceProject
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static int  Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            try
+			{
+                CreateHostBuilder(args).Build().Run();
+
+                return 0;
+            }
+            catch(Exception ex)
+			{
+                var msg = "An unhandled exception occurred. The application will be closed";
+                Log.Logger?.Fatal(ex, msg);
+                if( Log.Logger == null )
+				{
+                    Console.WriteLine(msg + Environment.NewLine + ex);
+				}
+                return 1;
+            }
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -31,17 +47,12 @@ namespace ReferenceProject
                 {
                     logging.ClearProviders();
 
-                    /*
-                     * You can use a global logger as this, but I don't recommend this way
-                     * More information: https://github.com/drwatson1/AspNet-Core-REST-Service/wiki#logging
+                    // https://github.com/drwatson1/AspNet-Core-REST-Service/wiki#logging
                     Log.Logger = new LoggerConfiguration()
                         .ReadFrom.Configuration(context.Configuration)
                         .CreateLogger();
-                    */
 
-                    logging.AddSerilog(new LoggerConfiguration()
-                        .ReadFrom.Configuration(context.Configuration)
-                        .CreateLogger());
+                    logging.AddSerilog(Log.Logger);
                 })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
