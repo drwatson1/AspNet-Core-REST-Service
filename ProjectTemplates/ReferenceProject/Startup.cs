@@ -19,6 +19,7 @@ using Newtonsoft.Json.Serialization;
 using ReferenceProject.Configuration;
 using ReferenceProject.Filters;
 using ReferenceProject.Modules;
+using Serilog;
 using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -137,6 +138,8 @@ namespace ReferenceProject
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, ILogger<Startup> logger)
         {
+            app.UseSerilogRequestLogging();
+
             // Use an exception handler middleware before any other handlers
             // See: https://github.com/drwatson1/AspNet-Core-REST-Service/wiki#unhandled-exceptions-handling
             app.UseExceptionHandler();

@@ -1,5 +1,4 @@
 ﻿using Autofac.Extensions.DependencyInjection;
-using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Configuration;
@@ -10,10 +9,14 @@ using System;
 
 namespace ReferenceProject
 {
-    public class Program
+	public class Program
     {
         public static int  Main(string[] args)
         {
+            Log.Logger = new LoggerConfiguration()
+                .WriteTo.Console()
+                .CreateBootstrapLogger();
+
             try
             {
                 CreateHostBuilder(args).Build().Run();
@@ -22,14 +25,13 @@ namespace ReferenceProject
             }
             catch(Exception ex)
             {
-                var msg = "An unhandled exception occurred. The application will be closed";
-                Log.Logger?.Fatal(ex, msg);
-                if( Log.Logger == null )
-                {
-                    Console.WriteLine(msg + Environment.NewLine + ex);
-                }
+                Log.Logger.Fatal(ex, "An unhandled exception occurred. The application will be closed");
                 return 1;
             }
+            finally
+			{
+                Log.CloseAndFlush();
+			}
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -43,6 +45,10 @@ namespace ReferenceProject
 
                     config.AddEnvironmentVariables();
                 })
+                .UseSerilog((context, services, configuration) => configuration
+                    .ReadFrom.Configuration(context.Configuration)
+                    .ReadFrom.Services(services)
+                )
                 .ConfigureLogging((context, logging) =>
                 {
                     logging.ClearProviders();
