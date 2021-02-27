@@ -9,7 +9,7 @@ using System;
 
 namespace ReferenceProject
 {
-	public class Program
+    public class Program
     {
         public static int  Main(string[] args)
         {
@@ -29,9 +29,9 @@ namespace ReferenceProject
                 return 1;
             }
             finally
-			{
+            {
                 Log.CloseAndFlush();
-			}
+            }
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
