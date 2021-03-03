@@ -45,21 +45,11 @@ namespace ReferenceProject
 
                     config.AddEnvironmentVariables();
                 })
+                // https://github.com/drwatson1/AspNet-Core-REST-Service/wiki#logging
                 .UseSerilog((context, services, configuration) => configuration
                     .ReadFrom.Configuration(context.Configuration)
                     .ReadFrom.Services(services)
                 )
-                .ConfigureLogging((context, logging) =>
-                {
-                    logging.ClearProviders();
-
-                    // https://github.com/drwatson1/AspNet-Core-REST-Service/wiki#logging
-                    Log.Logger = new LoggerConfiguration()
-                        .ReadFrom.Configuration(context.Configuration)
-                        .CreateLogger();
-
-                    logging.AddSerilog(Log.Logger);
-                })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
