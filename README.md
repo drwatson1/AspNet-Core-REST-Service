@@ -42,6 +42,7 @@ Have fun and happy hacking!
 
 |Date | Version | Release Notes |
 |-----|---------|---------------|
+|2021-03-07|2.5|<p>- Minor fixes |
 |2021-02-27|2.4|<p>- Improve logging |
 |2021-02-23|2.3|<p>- Load .env before Serilog initialization to make it possible to use environment variables in Serilog configuration options<p>- Catch and log unhandled exceptions <p>- Update NuGet packages to the latest versions|
 |2020-08-14|2.2|<p>- Allow Swagger to work behind a proxy<p>- Improve Application Settings with `Options Pattern` and [Configuration Extensions](https://github.com/drwatson1/configuration-extensions)<p>- Update NuGet packages to the latest versions
