@@ -20,6 +20,16 @@ After making any changes do:
     <ProjectTypeTag>web</ProjectTypeTag>
     <ProjectTypeTag>RESTful Service</ProjectTypeTag>
 ```
+1. Add the following after the end of the `<TemplateContent>`:
+```xml
+    <WizardExtension>
+        <Assembly>ASP.Net Core RESTful Service Template, Version=1.0.0.0, Culture=Neutral, PublicKeyToken=25038595d2af3199</Assembly>
+        <FullClassName>ReferenceProjectVSIX.ProjectTemplateWizard</FullClassName>
+    </WizardExtension>
+```
+TDB:
+Use a key, sign the VSIX assembly, create a token - 
+[Connect the wizard to the custom template](https://docs.microsoft.com/en-us/visualstudio/extensibility/how-to-use-wizards-with-project-templates?view=vs-2019#connect-the-wizard-to-the-custom-template)
 1. Add all files from the folder to zip-archive with a name `ASP.Net Core RESTful Service.zip`. All added files must be in the root of the archive
 1. Copy this file to `ProjectTemplates\ReferenceProjectVSIX\ProjectTemplates\CSharp\.NET Core` folder and replace an existing one
 1. Go to VS, expand a ReferenceProjectVSIX project and double click on source.extension.vsixmanifest file
