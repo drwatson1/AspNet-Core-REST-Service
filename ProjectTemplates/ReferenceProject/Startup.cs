@@ -29,14 +29,17 @@ using System.Text.Json.Serialization;
  * Getting started guide: https://github.com/drwatson1/AspNet-Core-REST-Service/wiki/Getting-Started-Guide
  * More information about configuring project: https://github.com/drwatson1/AspNet-Core-REST-Service/wiki
  */
-
 namespace ReferenceProject
 {
     public class Startup
     {
+        IConfiguration Configuration { get; }
+        IHostEnvironment HostEnvironment { get; }
+
         public Startup(IConfiguration configuration, IHostEnvironment env)
         {
-            Startup.Configuration = configuration;
+            Configuration = configuration;
+            HostEnvironment = env;
 
             // See: https://github.com/drwatson1/AspNet-Core-REST-Service/wiki#content-formatting
             JsonConvert.DefaultSettings = () =>
@@ -47,18 +50,12 @@ namespace ReferenceProject
                     NullValueHandling = NullValueHandling.Ignore,
                     DefaultValueHandling = DefaultValueHandling.Include,
                     ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-#if DEBUG
-                    Formatting = Formatting.Indented
-#else
-                    Formatting = Formatting.None
-#endif
+                    Formatting = env.IsDevelopment() ? Formatting.Indented : Formatting.None
                 };
                 settings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
                 return settings;
             };
         }
-
-        public static IConfiguration Configuration { get; private set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -82,11 +79,7 @@ namespace ReferenceProject
                     options.JsonSerializerOptions.IgnoreNullValues = true;
                     options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase));
                     options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
-#if DEBUG
-                    options.JsonSerializerOptions.WriteIndented = true;
-#else
-                    options.JsonSerializerOptions.WriteIndented = false;
-#endif
+                    options.JsonSerializerOptions.WriteIndented = HostEnvironment.IsDevelopment();
                 })
                 .AddApiExplorer()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
