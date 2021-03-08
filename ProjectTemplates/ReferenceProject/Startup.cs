@@ -82,6 +82,11 @@ namespace ReferenceProject
                     options.JsonSerializerOptions.IgnoreNullValues = true;
                     options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase));
                     options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+#if DEBUG
+                    options.JsonSerializerOptions.WriteIndented = true;
+#else
+                    options.JsonSerializerOptions.WriteIndented = false;
+#endif
                 })
                 .AddApiExplorer()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
