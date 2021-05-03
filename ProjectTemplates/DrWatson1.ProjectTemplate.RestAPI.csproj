@@ -15,11 +15,22 @@
     <ContentTargetFolders>content</ContentTargetFolders>
     <NoWarn>$(NoWarn);NU5128</NoWarn>
     <PackageReleaseNotes>Support of .Net Core 5.0 and dotnet new custom template</PackageReleaseNotes>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/drwatson1/AspNet-Core-REST-Service</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/drwatson1/AspNet-Core-REST-Service</RepositoryUrl>
+    <RepositoryType>GitHub</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>
     <Content Include="ReferenceProject\**\*" Exclude="ReferenceProject\**\bin\**;ReferenceProject\**\obj\**" />
     <Compile Remove="**\*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
