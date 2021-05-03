@@ -29,24 +29,6 @@
     <None Remove="wwwroot\**" />
   </ItemGroup>
 
-  <PropertyGroup>
-    <PackageType>Template</PackageType>
-    <PackageVersion>2.6</PackageVersion>
-    <PackageId>AdatumCorporation.Utility.Templates</PackageId>
-    <Title>ASP.Net Core RESTful Service Template</Title>
-    <Authors>Sergey Tregub</Authors>
-    <Description>Project template to create production-ready RESTful service based on ASP.Net Core v3.1 or 5.0. It contains preconfigured DI-container, logging, CORS, some boilerplate code and other features</Description>
-    <PackageTags>dotnet-new;templates;webapi;web;rest-api</PackageTags>
-
-    <IncludeContentInPack>true</IncludeContentInPack>
-    <IncludeBuildOutput>false</IncludeBuildOutput>
-    <ContentTargetFolders>content</ContentTargetFolders>
-  </PropertyGroup>
-  
-  <ItemGroup>
-    <Content Include=".template.config\template.json" Exclude="**\bin\**;**\obj\**" />
-  </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Autofac.Configuration" Version="6.0.0" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.1.0" />
