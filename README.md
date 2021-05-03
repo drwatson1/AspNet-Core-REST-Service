@@ -1,6 +1,6 @@
 # ASP.Net Core RESTful Service Template
 
-The repository contains a ready to use preconfigured project template for MS Visual Studio 2017 and 2019 to create fully functional production-ready cross-platform RESTful services based on ASP.Net Core 3.1.
+The repository contains a ready to use preconfigured project template for MS Visual Studio 2017 and 2019 to create fully functional production-ready cross-platform RESTful services based on ASP.Net Core 3.1/5.0.
 
 > Note 1. ASP.NET Core 3.0 has many breaking changes against version 2.2. If you want to use v2.2 or earlier, please, check out one of the previous releases, starting from [version 1.3](https://github.com/drwatson1/AspNet-Core-REST-Service/releases/tag/v1.3) or earlier.
 > 
@@ -24,7 +24,7 @@ Let me know, what do you think. Any suggestions and bug reports are very appreci
 
 # Getting Started
 
-
+## Using Visual Studio
 1. Install the extension from [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=sergey-tregub.asp-net-core-restful-service-template#overview) or download and install the latest version from [GitHub](https://github.com/drwatson1/AspNet-Core-REST-Service/releases/latest). Also, you can install it from Visual Studio. To do so click on "Tools/Extensions and Updates..." menu item, then select "Online/Visual Studio Marketplace/Templates" on the left pane, search for "ASP.Net Core RESTful Service Template," select it and click "Download" button. Please note! The latest version of the template is targeted to the .Net Core 3.1. If you need a template for 2.x version use one of the previous version of the template.
 1. Restart Visual Studio
 1. Click on "File/New Project..." menu item
@@ -34,6 +34,25 @@ Let me know, what do you think. Any suggestions and bug reports are very appreci
 1. Open a browser and navigate to [http://localhost:5000/swagger](http://localhost:5000/swagger) to see an API documentation
 1. Play around with the API. Try to add a new product or update one
 
+## Using command line
+
+1. Install the template:
+```
+dotnet new -i DrWatson1.ProjectTemplate.RestAPI
+```
+2. Create a project:
+```
+dotnet new rest-api -n ASPNetCoreService
+```
+It creates a new project "ASPNetCoreService" in the corresponding subfolder.
+Replace the "ASPNetCoreService" with a desired name.
+3. Run the project:
+```
+dotnet run
+```
+4. Open a browser and navigate to [http://localhost:5000/swagger](http://localhost:5000/swagger) to see an API documentation
+5. Play around with the API. Try to add a new product or update one
+
 Visit project [Wiki](https://github.com/drwatson1/AspNet-Core-REST-Service/wiki) pages to learn more about the template.
 
 Have fun and happy hacking!
@@ -42,6 +61,7 @@ Have fun and happy hacking!
 
 |Date | Version | Release Notes |
 |-----|---------|---------------|
+|2021-05-03|2.6|<p>- Support of .Net 5.0<p>- Add `dotnet new` custom template
 |2021-03-07|2.5|<p>- Minor fixes |
 |2021-02-27|2.4|<p>- Improve logging |
 |2021-02-23|2.3|<p>- Load .env before Serilog initialization to make it possible to use environment variables in Serilog configuration options<p>- Catch and log unhandled exceptions <p>- Update NuGet packages to the latest versions|
