@@ -4,7 +4,6 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <LangVersion>latest</LangVersion>
     <AspNetCoreModuleName>AspNetCoreModuleV2</AspNetCoreModuleName>
-    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -30,8 +29,22 @@
     <None Remove="wwwroot\**" />
   </ItemGroup>
 
+  <PropertyGroup>
+    <PackageType>Template</PackageType>
+    <PackageVersion>2.6</PackageVersion>
+    <PackageId>AdatumCorporation.Utility.Templates</PackageId>
+    <Title>ASP.Net Core RESTful Service Template</Title>
+    <Authors>Sergey Tregub</Authors>
+    <Description>Project template to create production-ready RESTful service based on ASP.Net Core v3.1 or 5.0. It contains preconfigured DI-container, logging, CORS, some boilerplate code and other features</Description>
+    <PackageTags>dotnet-new;templates;webapi;web;rest-api</PackageTags>
+
+    <IncludeContentInPack>true</IncludeContentInPack>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <ContentTargetFolders>content</ContentTargetFolders>
+  </PropertyGroup>
+  
   <ItemGroup>
-    <Content Include=".template.config\template.json" />
+    <Content Include=".template.config\template.json" Exclude="**\bin\**;**\obj\**"/>
   </ItemGroup>
 
   <ItemGroup>

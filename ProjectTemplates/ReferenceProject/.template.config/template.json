@@ -1,9 +1,9 @@
 {
   "$schema": "http://json.schemastore.org/template",
   "author": "Sergey Tregub",
-  "classifications": [ "Web", "WebAPI" ],
+  "classifications": [ "Web", "WebAPI", "REST"],
   "name": "ASP.Net Core RESTful Service",
-  "identity": "DrWatson1.ProjectTemplate.ASP.Net.Core.WebAPI",
+  "identity": "DrWatson1.ProjectTemplate.RestAPI",
   "groupIdentity": "DrWatson1.ProjectTemplate",
   "shortName": "rest-api",
   "tags": {
