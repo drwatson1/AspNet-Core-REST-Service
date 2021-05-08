@@ -46,8 +46,10 @@ dotnet new rest-api -n ASPNetCoreService
 ```
 It creates a new project "ASPNetCoreService" in the corresponding subfolder.
 Replace the "ASPNetCoreService" with a desired name.
+
 3. Run the project:
 ```
+cd ASPNetCoreService
 dotnet run
 ```
 4. Open a browser and navigate to [http://localhost:5000/swagger](http://localhost:5000/swagger) to see an API documentation
