@@ -59,6 +59,10 @@ Visit project [Wiki](https://github.com/drwatson1/AspNet-Core-REST-Service/wiki)
 
 Have fun and happy hacking!
 
+# Use .Net 5.0
+
+If you want to use .Net 5.0 instead of .Net Core 3.1 open a `.csproj` file and change a value of a `<TargetFramework>` tag from `netcoreapp3.1` to `net5.0`.
+
 # Release Notes
 
 |Date | Version | Release Notes |
