@@ -25,7 +25,7 @@ Let me know, what do you think. Any suggestions and bug reports are very appreci
 # Getting Started
 
 ## Using Visual Studio
-1. Install the extension from [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=sergey-tregub.asp-net-core-restful-service-template#overview) or download and install the latest version from [GitHub](https://github.com/drwatson1/AspNet-Core-REST-Service/releases/latest). Also, you can install it from Visual Studio. To do so click on "Tools/Extensions and Updates..." menu item, then select "Online/Visual Studio Marketplace/Templates" on the left pane, search for "ASP.Net Core RESTful Service Template," select it and click "Download" button. Please note! The latest version of the template is targeted to the .Net Core 3.1. If you need a template for 2.x version use one of the previous version of the template.
+1. Install the extension from [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=sergey-tregub.asp-net-core-restful-service-template#overview) or download and install the latest version from [GitHub](https://github.com/drwatson1/AspNet-Core-REST-Service/releases/latest). Also, you can install it from Visual Studio. To do so click on "Tools/Extensions and Updates..." menu item, then select "Online/Visual Studio Marketplace/Templates" on the left pane, search for "ASP.Net Core RESTful Service Template," select it and click "Download" button. Please note! The latest version of the template is targeted to the .Net Core 3.1. If you need a template for the 2.x version use one of the previous versions of the template.
 1. Restart Visual Studio
 1. Click on "File/New Project..." menu item
 1. Expand "Installed/Visual C#/.NET Core" on the left pane
