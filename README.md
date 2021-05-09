@@ -38,7 +38,7 @@ Let me know, what do you think. Any suggestions and bug reports are very appreci
 
 1. Install the template:
 ```
-dotnet new -i DrWatson1.ProjectTemplate.RestAPI
+dotnet new -i DrWatson.ProjectTemplate.RestAPI
 ```
 2. Create a project:
 ```
