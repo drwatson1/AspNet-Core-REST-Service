@@ -3,8 +3,8 @@
   "author": "Sergey Tregub",
   "classifications": [ "Web", "WebAPI", "REST"],
   "name": "ASP.Net Core RESTful Service",
-  "identity": "DrWatson1.ProjectTemplate.RestAPI",
-  "groupIdentity": "DrWatson1.ProjectTemplate",
+  "identity": "DrWatson.ProjectTemplate.RestAPI",
+  "groupIdentity": "DrWatson.ProjectTemplate",
   "shortName": "rest-api",
   "tags": {
     "language": "C#",
