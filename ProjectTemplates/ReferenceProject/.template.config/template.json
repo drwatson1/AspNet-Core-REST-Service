@@ -11,5 +11,23 @@
     "type": "project"
   },
   "sourceName": "ReferenceProject",
-  "preferNameDirectory": true
+  "preferNameDirectory": true,
+  "symbols": {
+    "TargetFramework": {
+      "type": "parameter",
+      "datatype": "choice",
+      "defaultValue": "netcoreapp3.1",
+      "description": "Target Framework",
+      "choices": [
+        {
+          "choice": "netcoreapp3.1",
+          "description": ".Net Core 3.1"
+        },
+        {
+          "choice": "net5.0",
+          "description": ".Net 5.0"
+        }
+      ]
+    }
+  }
 }
