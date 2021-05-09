@@ -13,11 +13,12 @@
   "sourceName": "ReferenceProject",
   "preferNameDirectory": true,
   "symbols": {
-    "TargetFramework": {
+    "targetFramework": {
       "type": "parameter",
       "datatype": "choice",
       "defaultValue": "netcoreapp3.1",
       "description": "Target Framework",
+      "replaces": "netcoreapp3.1",
       "choices": [
         {
           "choice": "netcoreapp3.1",
