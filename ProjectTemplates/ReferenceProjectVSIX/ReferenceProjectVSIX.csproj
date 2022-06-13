@@ -53,6 +53,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+    <Content Include="ReleaseNotes.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <None Include="Assets\logo.xcf" />
     <Content Include="ProjectTemplates\CSharp\.NET Core\ASP.Net Core RESTful Service.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
