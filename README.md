@@ -2,7 +2,7 @@
 
 The repository contains a ready to use preconfigured project template for MS Visual Studio 2017, 2019 and 2022 to create fully functional production-ready cross-platform RESTful services based on .Net 5.0/6.0.
 
-> NOte 1. The current version does not support .Net Core 3.1. If you want to use it you can use the previous [version 2.6](https://github.com/drwatson1/AspNet-Core-REST-Service/releases/tag/v2.6).
+> Note 1. The current version does not support .Net Core 3.1. If you want to use it you can use the previous [version 2.6](https://github.com/drwatson1/AspNet-Core-REST-Service/releases/tag/v2.6).
 >
 > Note 2. ASP.NET Core 3.0 has many breaking changes against version 2.2. If you want to use v2.2 or earlier, please, check out one of the previous releases, starting from [version 1.3](https://github.com/drwatson1/AspNet-Core-REST-Service/releases/tag/v1.3) or earlier.
 > 
