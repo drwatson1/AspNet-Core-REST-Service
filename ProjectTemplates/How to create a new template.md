@@ -11,7 +11,7 @@ After making any changes do:
 1. Clear checkbox "Automatically import the template into Visual Studio" if you don't want immediately import it and click Finish button
 1. Extract all files from the created zip-archive to any folder as you want. Typically, the file can be found in `C:\Users\<YOU>\Documents\Visual Studio 2022\My Exported Templates` folder
 1. Open a file "MyTemplate.vstemplate"
-1. Replace content of the tag `DefaultName` in the section `TemplateData` to `ASPNetCore.Service`
+1. Replace content of the tag `DefaultName` in the section `TemplateData` to `RestApi.Service`
 1. Add the following tags to the same section:
 ```xml
     <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
