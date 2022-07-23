@@ -2,11 +2,11 @@
 
   <PropertyGroup>
     <PackageType>Template</PackageType>
-    <PackageVersion>2.6</PackageVersion>
+    <PackageVersion>3.0</PackageVersion>
     <PackageId>DrWatson1.ProjectTemplate.RestAPI</PackageId>
-    <Title>ASP.Net Core RESTful Service Template</Title>
+    <Title>ASP.Net REST API Service Template</Title>
     <Authors>Sergey Tregub</Authors>
-    <Description>Project template to create production-ready RESTful service based on ASP.Net Core v3.1 or 5.0. It contains preconfigured DI-container, logging, CORS, some boilerplate code and other features</Description>
+    <Description>Project template to create production-ready RESTful service based on ASP.Net 6. It contains preconfigured DI-container, logging, CORS, some boilerplate code and other features</Description>
     <PackageTags>dotnet-new;templates;webapi;web;rest-api</PackageTags>
     <TargetFramework>netcoreapp3.1</TargetFramework>
 
@@ -14,7 +14,53 @@
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <ContentTargetFolders>content</ContentTargetFolders>
     <NoWarn>$(NoWarn);NU5128</NoWarn>
-    <PackageReleaseNotes>Support of .Net Core 5.0 and dotnet new custom template</PackageReleaseNotes>
+    <PackageReleaseNotes>3.0 - 2022-06-13
+  - BREAKING CHANGES: Drop support of .Net Core 3.1 
+  - The template now uses .Net 6.0 by default
+  - Support of Visual Studio 2022
+  - All packages was updated to the latest versions
+
+2.6 - 2021-05-03
+  - Support of .Net 5.0
+  - Add `dotnet new` custom template
+
+2.5 - 2021-03-07
+  - Minor fixes
+
+2.4 - 2021-02-27
+  - Improve logging 
+
+2.3 - 2021-02-23
+  - Load .env before Serilog initialization to make it possible to use environment variables in Serilog configuration options
+  - Catch and log unhandled exceptions
+  - Update NuGet packages to the latest versions
+
+2.2 - 2020-08-14
+  - Allow Swagger to work behind a proxy
+  - Improve Application Settings with `Options Pattern` and [Configuration Extensions](https://github.com/drwatson1/configuration-extensions)
+  - Update NuGet packages to the latest versions
+
+2.1 - 2020-01-22
+  - Fix deploying to IIS
+  - Fix publishing the service
+
+2.0 - 2020-01-22
+  - Change target framework to .Net Core 3.1
+  - Add health check service
+
+1.3 - 2020-01-21
+  - Update target framework to .Net Core 2.2
+
+1.2 - 2019-08-22
+  - Project tags are added to make it simple to find this project template in a VS2019 project creation wizard
+  - Update NuGet packages to the latest versions
+
+1.1 - 2019-04-03
+  - Support VS2019
+
+1.0 - 2019-01-21
+  - Initial version
+</PackageReleaseNotes>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/drwatson1/AspNet-Core-REST-Service</PackageProjectUrl>
     <RepositoryUrl>https://github.com/drwatson1/AspNet-Core-REST-Service</RepositoryUrl>

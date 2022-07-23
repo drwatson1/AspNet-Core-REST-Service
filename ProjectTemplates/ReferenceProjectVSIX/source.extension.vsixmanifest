@@ -1,22 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="ASP.Net Core RESTful Service Template-1" Version="2.6" Language="en-US" Publisher="Sergey Tregub" />
-        <DisplayName>ASP.Net Core 3.1/5.0 RESTful Service Template</DisplayName>
-        <Description xml:space="preserve">Project template to create production-ready RESTful service based on ASP.Net Core 3.1 or 5.0. It contains preconfigured DI-container, logging, CORS, some boilerplate code and other features</Description>
+        <Identity Id="ASP.Net Core RESTful Service Template-1" Version="3.0" Language="en-US" Publisher="Sergey Tregub" />
+        <DisplayName>ASP.Net REST API Service Template</DisplayName>
+        <Description xml:space="preserve">Project template to create production-ready RESTful service based on ASP.Net 5.0 or 6.0. It contains preconfigured DI-container, logging, CORS, some boilerplate code and other features</Description>
         <MoreInfo>https://github.com/drwatson1/AspNet-Core-REST-Service</MoreInfo>
         <GettingStartedGuide>https://github.com/drwatson1/AspNet-Core-REST-Service/wiki</GettingStartedGuide>
-        <ReleaseNotes>Support of .Net Core 5.0 and dotnet new custom template</ReleaseNotes>
+        <ReleaseNotes>ReleaseNotes.txt</ReleaseNotes>
         <Icon>Assets\logo.png</Icon>
-        <Tags>asp-net-core restful-api vs2017 vs2019 visual-studio project-template web-api</Tags>
+        <Tags>asp-net-core restful-api vs2019 vs2022 visual-studio project-template web-api</Tags>
     </Metadata>
     <Installation>
-        <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[15.0, 17.0)" />
+        <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[15.0, 17.0)">
+            <ProductArchitecture>x86</ProductArchitecture>
+        </InstallationTarget>
+        <InstallationTarget Version="[17.0,18.0)" Id="Microsoft.VisualStudio.Community">
+            <ProductArchitecture>amd64</ProductArchitecture>
+        </InstallationTarget>
     </Installation>
     <Dependencies>
     </Dependencies>
     <Assets>
-        <Asset Type="Microsoft.VisualStudio.ProjectTemplate" d:Source="File" Path="ProjectTemplates" d:TargetPath="ProjectTemplates\CSharp\.NET Core\ASP.Net Core RESTful Service.zip" />
+        <Asset Type="Microsoft.VisualStudio.ProjectTemplate" d:Source="File" Path="ProjectTemplates" d:TargetPath="ProjectTemplates\ASP.Net REST API.zip" />
     </Assets>
     <Prerequisites>
         <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor" Version="[15.0,)" DisplayName="Visual Studio core editor" />

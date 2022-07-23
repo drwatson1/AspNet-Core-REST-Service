@@ -5,6 +5,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
@@ -20,7 +21,9 @@ using ReferenceProject.Configuration;
 using ReferenceProject.Filters;
 using ReferenceProject.Modules;
 using Serilog;
+using System;
 using System.IO;
+using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -76,13 +79,12 @@ namespace ReferenceProject
                 })
                 .AddJsonOptions(options =>
                 {
-                    options.JsonSerializerOptions.IgnoreNullValues = true;
+                    options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
                     options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase));
                     options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
                     options.JsonSerializerOptions.WriteIndented = HostEnvironment.IsDevelopment();
                 })
-                .AddApiExplorer()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+                .AddApiExplorer();
 
             services
                 .AddAutoMapper(typeof(Startup)) // Check out Configuration/AutoMapperProfiles/DefaultProfile to do actual configuration. See: https://github.com/drwatson1/AspNet-Core-REST-Service/wiki#automapper
@@ -146,13 +148,15 @@ namespace ReferenceProject
 
             // See: https://github.com/drwatson1/AspNet-Core-REST-Service/wiki#cross-origin-resource-sharing-cors-and-preflight-requests
             app.UseCors(builder => builder
-                .AllowAnyOrigin()
                 .AllowAnyMethod()
-                .AllowAnyHeader());
+                .AllowAnyHeader()
+                .AllowAnyOrigin() // <-- Comment this line out and uncomment two lines below to use with SignalR
+                /*.AllowCredentials()
+                  .SetIsOriginAllowed(origin => true)*/
+                );
 
-            app
-                .UseOptionsVerbHandler()    // Options verb handler must be added after CORS. See: https://github.com/drwatson1/AspNet-Core-REST-Service/wiki#cross-origin-resource-sharing-cors-and-preflight-requests
-                .UseSwaggerWithOptions();   // Check out Configuration/MiddlewareConfig.cs/UseSwaggerWithOptions to do actual configuration. See: https://github.com/drwatson1/AspNet-Core-REST-Service/wiki#documenting-api
+            app.UseOptionsVerbHandler()    // Options verb handler must be added after CORS. See: https://github.com/drwatson1/AspNet-Core-REST-Service/wiki#cross-origin-resource-sharing-cors-and-preflight-requests
+               .UseSwaggerWithOptions();   // Check out Configuration/MiddlewareConfig.cs/UseSwaggerWithOptions to do actual configuration. See: https://github.com/drwatson1/AspNet-Core-REST-Service/wiki#documenting-api
 
             app.UseEndpoints(endpoints =>
             {
@@ -161,6 +165,12 @@ namespace ReferenceProject
             });
 
             logger.LogInformation("Server configuration is completed");
+            var addr = app.ServerFeatures.Get<IServerAddressesFeature>().Addresses.FirstOrDefault();
+            if (!string.IsNullOrWhiteSpace(addr))
+            {
+                var uri = new Uri(new Uri(addr), "swagger");
+                logger.LogInformation("Open {uri} to browse the server API", uri);
+            }
         }
     }
 }
